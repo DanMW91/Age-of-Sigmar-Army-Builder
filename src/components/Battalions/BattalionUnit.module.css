@@ -1,0 +1,41 @@
+.unit {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background: rgb(224, 201, 97);
+  border: 4px solid rgb(129, 121, 95);
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+  height: 5%;
+  transition: transform 0.2s;
+}
+
+.unit:hover {
+  cursor: pointer;
+  transform: scale(1.015);
+}
+
+.selectedUnit {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background: rgb(216, 75, 70);
+  border: 4px solid rgb(129, 121, 95);
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+  height: 5%;
+  transition: transform 0.2s;
+}
+
+.selectedUnit:hover {
+  cursor: pointer;
+  transform: scale(1.015);
+}
+.leaderSelect {
+}
+
+.hidden {
+  display: none;
+}

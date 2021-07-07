@@ -1,0 +1,52 @@
+.battalionSquare {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: 20vw;
+  background: rgb(124, 20, 20);
+
+  border: 4px solid rgb(190, 44, 44);
+  margin-top: 2%;
+  margin-bottom: 2%;
+  transition: transform 0.2s;
+}
+
+.battalionSquare:hover {
+  cursor: pointer;
+  transform: scale(1.025);
+}
+
+.battalionName {
+  width: 100%;
+  background: rgb(190, 44, 44);
+  display: flex;
+  justify-content: center;
+}
+.battalionName h2 {
+  margin: 0;
+}
+
+.battalionBonuses {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  background: rgb(190, 44, 44);
+}
+.battalionBonuses h3 {
+  border: 2px solid black;
+  padding: 3px;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+.unitRow {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.battalionContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

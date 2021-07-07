@@ -1,0 +1,64 @@
+.activeBattalion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 20%;
+}
+
+.activeBattalion p {
+  background: rgb(191, 227, 241);
+}
+
+.activeBattalion {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: 20vw;
+  background: rgb(0, 183, 255);
+
+  margin-top: 2%;
+  margin-bottom: 2%;
+  transition: transform 0.2s;
+}
+
+.activeBattalion:hover {
+  transform: scale(1.025);
+}
+
+.battalionName {
+  width: 100%;
+  background: rgb(34, 99, 124);
+  display: flex;
+  justify-content: center;
+}
+.battalionName h2 {
+  margin: 0;
+}
+
+.battalionBonuses {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  background: rgb(2, 68, 168);
+}
+.battalionBonuses h3 {
+  border: 2px solid black;
+  padding: 3px;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+.unitRow {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.battalionContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

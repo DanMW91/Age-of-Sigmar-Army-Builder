@@ -1,0 +1,22 @@
+.unitContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid rgb(102, 84, 26);
+  background: rgb(224, 201, 97);
+  padding-bottom: 7px;
+  width: 88%;
+  margin: auto;
+  margin-bottom: 3vw;
+  margin-top: 1%;
+}
+.containerHeader {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: rgb(102, 84, 26);
+}
+.containerHeader h2 {
+  margin: 1px;
+  color: rgb(255, 255, 255);
+}

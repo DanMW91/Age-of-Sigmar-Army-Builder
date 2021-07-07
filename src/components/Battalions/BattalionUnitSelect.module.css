@@ -1,0 +1,52 @@
+.battalionsUnitsContainer {
+  border: 3px solid rgb(99, 21, 21);
+  background: rgb(194, 37, 37);
+  padding-bottom: 7px;
+  width: 88%;
+  margin: auto;
+  margin-bottom: 3vw;
+  margin-top: 2%;
+}
+.containerheader {
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgb(99, 21, 21);
+}
+.containerheader h2 {
+  text-decoration: underline;
+  margin: 1px;
+  color: rgb(202, 217, 228);
+  margin-bottom: 4px;
+}
+
+.battalionFulfillment {
+  display: flex;
+  width: 100%;
+  color: rgb(202, 217, 228);
+  justify-content: space-around;
+  font-weight: bold;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(15, 63, 85);
+  width: 8vw;
+  height: 3vw;
+  background: rgb(61, 181, 236);
+  border-radius: 15px;
+  box-shadow: 4px 4px rgb(35, 96, 124);
+  margin-bottom: 10px;
+}
+.button:hover {
+  cursor: pointer;
+}
+.button:active {
+  box-shadow: 1px 1px rgb(35, 96, 124);
+}

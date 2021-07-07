@@ -1,0 +1,53 @@
+.tracker {
+  border: 3px solid black;
+  display: flex;
+  width: 7vw;
+  height: 5vw;
+  border: 3px solid rgb(30, 78, 110);
+  background: rgb(24, 117, 179);
+  margin-top: 3vw;
+  border-radius: 20px;
+}
+.tracker img {
+  transition: transform 0.2s;
+  width: 40%;
+  height: 30%;
+}
+.tracker img:active {
+  transform: scale(0.8);
+}
+
+.tracker img:hover {
+  cursor: pointer;
+}
+.tracking {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  text-align: center;
+}
+.number {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.counter {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .tracker {
+    width: 15vw;
+    height: 12vw;
+  }
+  .tracking {
+    font-size: small;
+  }
+  .number {
+    font-size: small;
+  }
+}

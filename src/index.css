@@ -1,0 +1,29 @@
+body {
+  font-size: 1vw !important;
+  margin: 0px;
+  font-family: "Cinzel", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(to top left, #b8b7b7, #777777) fixed;
+  overflow: scroll;
+  padding-top: 0px;
+  height: 100%;
+}
+
+body #modal-root {
+  display: flex;
+  justify-content: center;
+}
+
+body #root {
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+html {
+  height: 100%;
+  overscroll-behavior: none;
+}

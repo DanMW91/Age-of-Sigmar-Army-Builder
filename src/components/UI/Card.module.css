@@ -1,0 +1,6 @@
+.card {
+  border-radius: 15px;
+
+  filter: drop-shadow(5px 5px 4px #2b2b2b);
+  margin: 10px;
+}

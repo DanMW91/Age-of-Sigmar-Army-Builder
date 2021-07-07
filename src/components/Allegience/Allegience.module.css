@@ -1,0 +1,71 @@
+.unit {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background: rgb(97, 123, 153);
+  border: 4px solid rgb(30, 78, 110);
+  margin-left: 5%;
+  margin-right: 5%;
+  transition: transform 0.2s;
+}
+
+.unit:hover {
+  cursor: pointer;
+  transform: scale(1.015);
+}
+.unit h2 {
+  margin-right: 5vw;
+  color: rgb(0, 0, 0);
+}
+.unitname {
+  text-align: center;
+  width: 10vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-right: 5px solid rgb(30, 78, 110);
+}
+
+.unitattributes {
+  display: flex;
+  width: 70%;
+  justify-content: space-evenly;
+  padding: 4px;
+}
+.unit table {
+  border-collapse: collapse;
+
+  background: linear-gradient(to top left, #bc9036, #ecdcbe);
+}
+
+.unit td {
+  border: solid 1px black;
+  text-align: center;
+}
+.unit td {
+  padding: 4px;
+}
+.unit thead {
+  font-weight: bold;
+}
+.warscroll {
+}
+
+@media only screen and (max-width: 600px) {
+  .warscroll {
+    width: 85vw;
+    height: auto;
+    object-fit: contain;
+  }
+  .warscrollmodal {
+    display: inline-block;
+  }
+  .unit {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+  .unit td {
+    padding: 1px;
+  }
+}

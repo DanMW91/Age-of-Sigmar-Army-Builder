@@ -1,0 +1,47 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgb(30, 78, 110);
+  background: rgb(48, 127, 179);
+  width: 50%;
+  margin-top: 10vw;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  height: 100vw;
+}
+.error {
+  margin: 5px;
+  padding: 5px;
+  background: rgb(153, 0, 0);
+  color: rgb(0, 0, 0);
+}
+.authForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.authForm label {
+  color: rgb(31, 19, 19);
+}
+.toggleForm {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+
+  color: rgb(153, 0, 0);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+input {
+  margin: 3px;
+}

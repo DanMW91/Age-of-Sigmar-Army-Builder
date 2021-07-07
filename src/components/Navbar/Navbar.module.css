@@ -1,0 +1,41 @@
+.navbar {
+  width: 100%;
+  background: rgb(24, 117, 179);
+  height: 3vw;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: center;
+
+  height: 100%;
+  margin: 0;
+}
+
+.navbar li {
+  display: flex;
+  margin-right: 5px;
+  height: 100%;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+
+  width: 20%;
+  background: rgb(123, 184, 224);
+}
+
+.navbar a {
+  display: flex;
+
+  line-height: 50%;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+}
+.navbar .active {
+  background: rgb(198, 220, 235);
+}

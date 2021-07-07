@@ -1,0 +1,26 @@
+.modal {
+  position: fixed;
+  z-index: 50;
+  height: 85%;
+  background: rgb(70, 70, 70);
+  overflow-y: scroll;
+}
+
+.overlay {
+  position: fixed;
+
+  display: flex;
+  justify-content: center;
+  z-index: 45;
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+  background: rgba(107, 128, 160, 0.664);
+}
+
+@media only screen and (max-width: 600px) {
+  .modal {
+    width: 85%;
+    height: auto;
+  }
+}

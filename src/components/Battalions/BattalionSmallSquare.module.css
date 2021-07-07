@@ -1,0 +1,12 @@
+.smallSquare {
+  padding: 2px;
+  border-radius: 3px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+.required {
+  background: red;
+}
+.optional {
+  background: rgb(201, 69, 69);
+}

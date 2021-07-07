@@ -1,0 +1,16 @@
+.battalionsContainer {
+  /* border: 3px solid rgb(30, 78, 110); */
+  background: rgb(48, 127, 179);
+  padding-bottom: 7px;
+  width: 88%;
+  margin: auto;
+  margin-bottom: 3vw;
+}
+
+.containerHeader {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: rgb(30, 78, 110);
+  color: aliceblue;
+}

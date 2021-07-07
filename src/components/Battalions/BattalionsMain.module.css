@@ -1,0 +1,30 @@
+.battalionsContainer {
+  border: 3px solid rgb(30, 78, 110);
+  background: rgb(48, 127, 179);
+  padding-bottom: 7px;
+  width: 88%;
+  margin: auto;
+  margin-bottom: 3vw;
+  margin-top: 2%;
+}
+.containerheader {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: rgb(30, 78, 110);
+}
+.containerheader h2 {
+  margin: 1px;
+  color: rgb(202, 217, 228);
+}
+.squareContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.squareRow {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  flex-wrap: wrap;
+}
