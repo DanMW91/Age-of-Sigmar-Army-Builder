@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
-import Header from "../Header/Header";
-import AddUnitModal from "../AddUnits/AddUnitModal";
+
 import AuthContext from "../../store/store";
 import ActiveBattalionsContainer from "../ActiveBattalions/ActiveBattalionsContainer";
 
@@ -11,34 +10,19 @@ import UnitContainer from "../UnitContainer/UnitContainer";
 import UnitSelect from "../UnitSelect/UnitSelect";
 
 const ArmyList = () => {
-  const [showAddUnitModal, setShowAddUnitModal] = useState(false);
+ 
 
   const authCtx = useContext(AuthContext);
   const units = authCtx.userArmy.units;
   const showBattalions = authCtx.userArmy?.activeBattalions[1] ? true : false;
 
-  const onAddUnitHandler = (e) => {
-    e.preventDefault();
-    setShowAddUnitModal(false);
-  };
-  const onOpenAddUnitModalHandler = () => {
-    setShowAddUnitModal(true);
-  };
+ 
 
-  const onCloseModalHandler = () => {
-    setShowAddUnitModal(false);
-  };
+  
 
   return (
     <>
-      {showAddUnitModal && (
-        <AddUnitModal
-          onCloseModal={onCloseModalHandler}
-          onAddUnit={onAddUnitHandler}
-        />
-      )}
-
-      <Header onOpenAddUnitModal={onOpenAddUnitModalHandler} />
+     
       {showBattalions && <ActiveBattalionsContainer />}
       {/* <AllegienceContainer containerType={"Allegience"} units={allegience} /> */}
 
