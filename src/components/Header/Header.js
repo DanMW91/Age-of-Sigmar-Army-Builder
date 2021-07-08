@@ -7,8 +7,9 @@ const Header = (props) => {
 
 const [displayingArmy, setDisplayingArmy] = useState(false)
 
-const displayingArmyHandler = () => {
+const displayingArmiesHandler = () => {
   setDisplayingArmy(true)
+  props.onOpenArmiesModal()
 }
 
   return (
@@ -19,13 +20,7 @@ const displayingArmyHandler = () => {
         <Tracker trackType={"VP"} />
       </div>
       <h2>Army Tracker</h2>
-      <div className={classes.button} onClick={displayingArmyHandler}>
-        <h4>Select Army</h4>
-      </div>
-      {displayingArmy && 
-      <div className={classes.button} onClick={props.onOpenAddUnitModal}>
-        <h4>Add Unit</h4>
-      </div>}
+     
     </div>
   );
 };

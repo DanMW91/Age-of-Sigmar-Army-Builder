@@ -57,6 +57,7 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
       other: [0],
     },
   }
+  console.log(newArmy);
 
   try {
     
@@ -68,6 +69,7 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
         }
       );
       if (!response.ok) {
+        console.log(response)
         throw new Error(response);
       }
 
@@ -82,6 +84,7 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
       }
     );
     if (!res.ok) {
+      console.log(res)
       throw new Error(res);
     }
     
@@ -205,11 +208,8 @@ export const loginUser = async (enteredEmail, enteredPassword) => {
 
     const { localId: userId, idToken: token } = results;
 
-    const data = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/army.json?auth=${token}`
-    );
-    const armyData = await data.json();
-    return { userId, token, armyData };
+   
+    return { userId, token};
   } catch (err) {
     throw new Error(err.message);
   }

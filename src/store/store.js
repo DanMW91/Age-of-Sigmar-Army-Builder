@@ -222,6 +222,7 @@ export const AuthContextProvider = (props) => {
     setLoading: setLoadingHandler,
     addBattalion: addBattalionHandler,
     deleteBattalion: deleteBattalionHandler,
+    setArmy: setArmyHandler
   };
 
   return (
