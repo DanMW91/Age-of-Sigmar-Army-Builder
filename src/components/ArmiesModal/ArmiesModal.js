@@ -1,3 +1,4 @@
+import {v4 as uuidv4} from 'uuid';
 import {useContext, useState, useRef} from 'react'
 import AuthContext from '../../store/store'
 import Modal from '../UI/Modal'
@@ -16,7 +17,7 @@ const NewArmyForm = (props) => {
         const userId = authCtx.userId
         const token = authCtx.token 
         const newArmyName = armyNameRef.current.value;
-        const armyId = Math.random()
+        const armyId = uuidv4()
 
         const newArmy = await createNewArmy(userId, token, newArmyName, armyId)
 

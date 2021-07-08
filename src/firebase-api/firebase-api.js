@@ -57,7 +57,7 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
       other: [0],
     },
   }
-  console.log(newArmy);
+
 
   try {
     
@@ -68,8 +68,11 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
           body: JSON.stringify(newArmy),
         }
       );
+
+      const result = await response.json()
+
       if (!response.ok) {
-        console.log(response)
+        console.log(result)
         throw new Error(response);
       }
 
