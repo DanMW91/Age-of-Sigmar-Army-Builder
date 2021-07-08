@@ -1,8 +1,8 @@
-export const storeArmy = async (userId, userArmy, armyId, token) => {
+export const storeArmy = async (userId, userArmy, token) => {
   try {
     
       const response = await fetch(
-        `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/armies/${armyId}.json?auth=${token}`,
+        `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/armies/${userArmy.armyId}.json?auth=${token}`,
         {
           method: "PUT",
           body: JSON.stringify(userArmy),

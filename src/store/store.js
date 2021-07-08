@@ -74,17 +74,22 @@ export const AuthContextProvider = (props) => {
 
   const userIsLoggedIn = !!token;
 
-  const loginHandler = (token, userId, userArmyData, name) => {
+
+  const setArmyHandler = (army) => {
+
+    dispatchUserArmy({
+      type: "LOAD-ARMY",
+      val: army,
+    });
+    
+  }
+
+  const loginHandler = (token, userId, name) => {
     setUserId(userId);
     setToken(token);
 
     setIsLoading(true);
     userName = name;
-
-    dispatchUserArmy({
-      type: "LOAD-ARMY",
-      val: userArmyData,
-    });
 
     setIsLoading(false);
   };
