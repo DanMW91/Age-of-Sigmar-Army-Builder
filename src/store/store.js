@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect, useCallback } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { storeArmy } from "../firebase-api/firebase-api";
 import produce from "immer";
 

@@ -1,13 +1,10 @@
-import { useState, useContext } from "react";
-
+import { useContext } from "react";
 import AuthContext from "../../store/store";
 import ActiveBattalionsContainer from "../ActiveBattalions/ActiveBattalionsContainer";
-
 // import PhaseWindow from "./components/Phase/PhaseWindow";
-
 // import AllegienceContainer from "../Allegience/AllegienceContainer";
 import UnitContainer from "../UnitContainer/UnitContainer";
-import UnitSelect from "../UnitSelect/UnitSelect";
+
 
 const ArmyList = () => {
  
