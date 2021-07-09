@@ -39,14 +39,6 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
     armyId,
     armyName: newArmyName,
     allegience: "",
-    allUnits: {
-      leaders: [0],
-      battleline: [0],
-      artillery: [0],
-      monsters: [0],
-      behemoths: [0],
-      other: [0],
-    },
     activeBattalions: [0],
     units: {
       leaders: [0],
@@ -147,6 +139,36 @@ const checkUserNameIsUnique = async (userName) => {
   }
 };
 
+const createAllUnitsFrame = async (userId, token) => {
+  try {
+    
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits/.json?auth=${token}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          leaders: [0],
+          battleline: [0],
+          artillery: [0],
+          monsters: [0],
+          behemoths: [0],
+          other: [0],
+        }),
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error.message);
+    }
+  
+    } catch (err) {
+  console.error(err);
+  }
+
+
+}
+
+
 export const registerUser = async (
   enteredEmail,
   enteredPassword,
@@ -181,6 +203,8 @@ export const registerUser = async (
     
 
     await storeUserName(userId, enteredUserName, token);
+    await createAllUnitsFrame(userId, token);
+    
 
     return { userId, token };
   } catch (err) {
@@ -228,11 +252,62 @@ export const retrieveArmies = async (userId, token)=> {
     if(!armiesData.ok) {
       throw new Error(allArmies.error)
     }
-    
+
    return allArmies
 
   }catch(err) {
     console.error(err)
+  }
+
+}
+
+
+
+
+export const retrieveUnits = async(userId, token) => {
+  try {
+    const unitsData = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits.json?auth=${token}`
+    );
+    const allUnits = await unitsData.json();
+
+    if(!unitsData.ok) {
+      throw new Error(allUnits.error)
+    }
+
+   return allUnits
+
+  }catch(err) {
+    console.error(err)
+  }
+
+
+
+}
+
+export const storeNewUnit = async (userId, token, unitObj, unitType) => {
+  
+  let unitsArray = await retrieveUnits(userId, token)
+  console.log(unitsArray);
+  unitsArray[`${unitType}`].push(unitObj)
+
+
+  try {
+    
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits/.json?auth=${token}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(unitsArray),
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error.message);
+    }
+  
+    } catch (err) {
+  console.error(err);
   }
 
 }

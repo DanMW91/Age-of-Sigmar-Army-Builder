@@ -1,4 +1,5 @@
 import { useState, useRef, useContext } from "react";
+import { storeNewUnit } from "../../firebase-api/firebase-api";
 import AuthContext from "../../store/store";
 import Modal from "../UI/Modal";
 import classes from "./AddUnitModal.module.css";
@@ -59,7 +60,14 @@ const AddUnitModal = (props) => {
 
   const onSubmitAttacksHandler = (e) => {
     // units.addUnit(unitObj.current.unit, unitObj.current.type);
+    const userId = authCtx.userId;
+    const token = authCtx.token;
+    const unit = unitObj.current.unit
+    const unitType = unitObj.current.type
+
     authCtx.addUnit(unitObj);
+    storeNewUnit(userId, token, unit, unitType)
+
   };
 
   return (

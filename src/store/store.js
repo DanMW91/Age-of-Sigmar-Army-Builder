@@ -21,9 +21,7 @@ const armyReducer = (state, action) =>
     switch (action.type) {
       case "LOAD-ARMY":
         return action.val;
-      case "STORE-NEW-UNIT":
-        draft.allUnits[`${action.unitType}`].push(action.unit);
-        break;
+
       case "ADD-UNIT":
         draft.units[`${action.unitType}`].push(action.unit);
 
@@ -119,19 +117,20 @@ export const AuthContextProvider = (props) => {
     userArmy = {};
   };
 
-  const addUnitHandler = (unitObj, isNew = true) => {
+  const addUnitHandler = (unitObj) => {
+  if(unitObj.current.type)
     dispatchUserArmy({
       type: "ADD-UNIT",
-      unitType: isNew ? unitObj.current.type : unitObj.unitType,
-      unit: isNew ? unitObj.current.unit : unitObj,
+      unitType: unitObj.current.type,
+      unit: unitObj.current.unit,
     });
-    if (isNew) {
-      dispatchUserArmy({
-        type: "STORE-NEW-UNIT",
-        unitType: unitObj.current.type,
-        unit: unitObj.current.unit,
-      });
-    }
+    if(unitObj.current.unitType)
+    dispatchUserArmy({
+      type: "ADD-UNIT",
+      unitType: unitObj.current.unitType,
+      unit: unitObj.current,
+    });
+  
   };
 
   const addToBattalionHelperFn = (unitTypeArr, unitType, battalionObj) => {
