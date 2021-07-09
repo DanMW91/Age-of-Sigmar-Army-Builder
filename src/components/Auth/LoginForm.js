@@ -84,10 +84,7 @@ const LoginForm = () => {
     const enteredPassword = passwordInputRef.current.value;
     authCtx.setLoading(true);
     try {
-      const { userId, token } = await loginUser(
-        enteredEmail,
-        enteredPassword
-      );
+      const { userId, token } = await loginUser(enteredEmail, enteredPassword);
 
       authCtx.login(token, userId);
       authCtx.setLoading(false);
@@ -103,7 +100,7 @@ const LoginForm = () => {
         <Card className={classes.loginForm}>
           {loggingIn && (
             <form className={classes.authForm} onSubmit={loginHandler}>
-              <label htmlFor="email">Emailers babs:</label>
+              <label htmlFor="email">Email:</label>
               <input id="email" type="text" ref={emailInputRef} required />
               <label htmlFor="password">Password:</label>
               <input
