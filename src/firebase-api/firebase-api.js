@@ -1,41 +1,8 @@
 export const storeArmy = async (userId, userArmy, token) => {
-  if (!token) return;
   try {
-    if (!userArmy) {
+    
       const response = await fetch(
-        `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/army.json?auth=${token}`,
-        {
-          method: "PUT",
-          body: JSON.stringify({
-            allegience: "",
-            allUnits: {
-              leaders: [0],
-              battleline: [0],
-              artillery: [0],
-              monsters: [0],
-              behemoths: [0],
-              other: [0],
-            },
-            activeBattalions: [0],
-            units: {
-              leaders: [0],
-              battleline: [0],
-              artillery: [0],
-              monsters: [0],
-              behemoths: [0],
-              other: [0],
-            },
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(response);
-      }
-    }
-    if (userArmy) {
-      const response = await fetch(
-        `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/army.json?auth=${token}`,
+        `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/armies/${userArmy.armyId}.json?auth=${token}`,
         {
           method: "PUT",
           body: JSON.stringify(userArmy),
@@ -45,11 +12,84 @@ export const storeArmy = async (userId, userArmy, token) => {
       if (!response.ok) {
         throw new Error(result.error.message);
       }
-    }
+    
   } catch (err) {
     console.error(err);
   }
 };
+
+export const retrieveArmy = async (userId, token, armyId) => {
+  try {
+  const armyData = await fetch(
+    `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/armies/${armyId}.json?auth=${token}`
+    );
+    const userArmy = await armyData.json();
+
+    return userArmy
+
+  } catch(err) {
+    console.error(err)
+  }
+
+}
+
+export const createNewArmy = async (userId, token, newArmyName, armyId) => {
+  
+  const newArmy = {
+    armyId,
+    armyName: newArmyName,
+    allegience: "",
+    activeBattalions: [0],
+    units: {
+      leaders: [0],
+      battleline: [0],
+      artillery: [0],
+      monsters: [0],
+      behemoths: [0],
+      other: [0],
+    },
+  }
+
+
+  try {
+    
+      const response = await fetch(
+        `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/armies/${armyId}.json?auth=${token}`,
+        {
+          method: "POST",
+          body: JSON.stringify(newArmy),
+        }
+      );
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.log(result)
+        throw new Error(response);
+      }
+
+      const res = await fetch(
+        `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allArmies.json?auth=${token}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          newArmyName,
+          armyId
+        }),
+      }
+    );
+    if (!res.ok) {
+      console.log(res)
+      throw new Error(res);
+    }
+    
+  }catch(err) {
+    console.error(err)
+  }
+
+  return newArmy
+}
+    
 
 export const storeUserName = async (userId, userName, token) => {
   try {
@@ -99,6 +139,36 @@ const checkUserNameIsUnique = async (userName) => {
   }
 };
 
+const createAllUnitsFrame = async (userId, token) => {
+  try {
+    
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits/.json?auth=${token}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          leaders: [0],
+          battleline: [0],
+          artillery: [0],
+          monsters: [0],
+          behemoths: [0],
+          other: [0],
+        }),
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error.message);
+    }
+  
+    } catch (err) {
+  console.error(err);
+  }
+
+
+}
+
+
 export const registerUser = async (
   enteredEmail,
   enteredPassword,
@@ -130,9 +200,11 @@ export const registerUser = async (
 
     const { localId: userId, idToken: token } = results;
 
-    await storeArmy(userId);
+    
 
     await storeUserName(userId, enteredUserName, token);
+    await createAllUnitsFrame(userId, token);
+    
 
     return { userId, token };
   } catch (err) {
@@ -163,12 +235,79 @@ export const loginUser = async (enteredEmail, enteredPassword) => {
 
     const { localId: userId, idToken: token } = results;
 
-    const data = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/army.json?auth=${token}`
-    );
-    const armyData = await data.json();
-    return { userId, token, armyData };
+   
+    return { userId, token};
   } catch (err) {
     throw new Error(err.message);
   }
 };
+
+export const retrieveArmies = async (userId, token)=> {
+  try {
+    const armiesData = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allArmies.json?auth=${token}`
+    );
+    const allArmies = await armiesData.json();
+
+    if(!armiesData.ok) {
+      throw new Error(allArmies.error)
+    }
+
+   return allArmies
+
+  }catch(err) {
+    console.error(err)
+  }
+
+}
+
+
+
+
+export const retrieveUnits = async(userId, token) => {
+  try {
+    const unitsData = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits.json?auth=${token}`
+    );
+    const allUnits = await unitsData.json();
+
+    if(!unitsData.ok) {
+      throw new Error(allUnits.error)
+    }
+
+   return allUnits
+
+  }catch(err) {
+    console.error(err)
+  }
+
+
+
+}
+
+export const storeNewUnit = async (userId, token, unitObj, unitType) => {
+  
+  let unitsArray = await retrieveUnits(userId, token)
+  console.log(unitsArray);
+  unitsArray[`${unitType}`].push(unitObj)
+
+
+  try {
+    
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits/.json?auth=${token}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(unitsArray),
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error.message);
+    }
+  
+    } catch (err) {
+  console.error(err);
+  }
+
+}

@@ -9,11 +9,11 @@ const UnitSelectUnit = (props) => {
   const unitObjRef = useRef(props.unitObj);
 
   const addUnitHandler = () => {
-    const newUnitObj = JSON.parse(JSON.stringify(unitObjRef.current));
+    const newUnitObj = JSON.parse(JSON.stringify(unitObjRef));
 
-    newUnitObj.id = Math.random();
-
-    authCtx.addUnit(newUnitObj, false);
+    newUnitObj.current.id = Math.random();
+    console.log(newUnitObj)
+    authCtx.addUnit(newUnitObj);
   };
 
   return (

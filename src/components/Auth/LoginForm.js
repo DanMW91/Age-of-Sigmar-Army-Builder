@@ -84,12 +84,9 @@ const LoginForm = () => {
     const enteredPassword = passwordInputRef.current.value;
     authCtx.setLoading(true);
     try {
-      const { userId, token, armyData } = await loginUser(
-        enteredEmail,
-        enteredPassword
-      );
+      const { userId, token } = await loginUser(enteredEmail, enteredPassword);
 
-      authCtx.login(token, userId, armyData);
+      authCtx.login(token, userId);
       authCtx.setLoading(false);
     } catch (err) {
       setError(err.message);
