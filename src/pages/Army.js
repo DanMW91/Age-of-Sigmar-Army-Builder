@@ -67,7 +67,7 @@ useEffect(()=> {
 
      <Header />
 
-     <container className={classes.armyContainer}>
+     <section className={classes.armyContainer}>
 
         <div className={classes.button} onClick={openArmiesModalHandler}>
             <h4>Select Army</h4>
@@ -83,7 +83,7 @@ useEffect(()=> {
     {showArmiesModal && <ArmiesModal onCloseModal={onCloseModalHandler}/>}
 
     {armyLoaded && <ArmyList />}
-    </container>
+    </section>
   </>
   )
 };

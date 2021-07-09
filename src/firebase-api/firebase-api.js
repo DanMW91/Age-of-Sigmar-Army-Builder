@@ -217,3 +217,22 @@ export const loginUser = async (enteredEmail, enteredPassword) => {
     throw new Error(err.message);
   }
 };
+
+export const retrieveArmies = async (userId, token)=> {
+  try {
+    const armiesData = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allArmies.json?auth=${token}`
+    );
+    const allArmies = await armiesData.json();
+
+    if(!armiesData.ok) {
+      throw new Error(allArmies.error)
+    }
+    
+   return allArmies
+
+  }catch(err) {
+    console.error(err)
+  }
+
+}
