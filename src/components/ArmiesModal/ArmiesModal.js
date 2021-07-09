@@ -3,7 +3,7 @@ import {useContext, useState, useRef} from 'react'
 import AuthContext from '../../store/store'
 import Modal from '../UI/Modal'
 import {createNewArmy} from '../../firebase-api/firebase-api'
-
+import classes from './Armies.module.css'
 
 const NewArmyForm = (props) => {
     const authCtx = useContext(AuthContext)
@@ -23,7 +23,8 @@ const NewArmyForm = (props) => {
 
         authCtx.setArmy(newArmy)
 
-        props.onCreateArmy()
+        
+       
         
     }
 
@@ -54,9 +55,9 @@ const hideNewArmyFormHandler = () => {
 
 
     return (
-    <Modal onCloseModal={props.onCloseModal}>
+    <Modal onCloseModal={props.onCloseModal} className={classes.armiesModal}>
         <button onClick={showNewArmyFormHandler}>Add New Army</button>
-        {showNewArmyForm && <NewArmyForm onCreateArmy={hideNewArmyFormHandler}/>}
+        {showNewArmyForm && <NewArmyForm />}
     </Modal>
     )
 }

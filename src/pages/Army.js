@@ -1,16 +1,36 @@
-import {useState} from 'react'
+import {useState, useContext, useEffect, useRef, useLayoutEffect} from 'react'
 import classes from './Army.module.css'
 import Header from '../components/Header/Header'
 import ArmyList from "../components/ArmyList/ArmyList";
 import AddUnitModal from '../components/AddUnits/AddUnitModal';
 import ArmiesModal from '../components/ArmiesModal/ArmiesModal'
+import AuthContext from '../store/store';
 
 const Army = () => {
+const authCtx = useContext(AuthContext)
+const [armyLoaded, setArmyLoaded] = useState(false)
+const [showAddUnitModal, setShowAddUnitModal] = useState(false)
+const [showArmiesModal, setShowArmiesModal] = useState(false)
+const [armyName, setArmyName] = useState('')
 
- const [loadedArmy, setLoadedArmy] = useState()
- const [showAddUnitModal, setShowAddUnitModal] = useState(false)
- const [showArmiesModal, setShowArmiesModal] = useState(false)
-const [displayingArmy, setDisplayingArmy] = useState(false)
+
+useLayoutEffect(()=> {
+  if(armyLoaded){
+ setArmyName(authCtx.userArmy.armyName)
+  }
+}, [authCtx.userArmy.armyName, armyLoaded])
+
+
+
+
+
+useEffect(()=> {
+  
+ setArmyLoaded(authCtx.armyLoaded)
+}, [authCtx.armyLoaded])
+
+
+
 
 
   const onAddUnitHandler = (e) => {
@@ -34,9 +54,10 @@ const [displayingArmy, setDisplayingArmy] = useState(false)
 
 
 
+
   return ( 
-    <>
-     
+    
+     <>
     {showAddUnitModal && (
         <AddUnitModal
           onCloseModal={onCloseModalHandler}
@@ -45,20 +66,24 @@ const [displayingArmy, setDisplayingArmy] = useState(false)
       )}
 
      <Header />
-     <div className={classes.button} onClick={openArmiesModalHandler}>
-        <h4>Select Army</h4>
-      </div>
-      {displayingArmy && 
-      <div className={classes.button} onClick={openAddUnitModalHandler}>
-        <h4>Add Unit</h4>
-      </div>}
+
+     <container className={classes.armyContainer}>
+
+        <div className={classes.button} onClick={openArmiesModalHandler}>
+            <h4>Select Army</h4>
+        </div>
+        {armyLoaded && 
+        <>
+        <div className={classes.button} onClick={openAddUnitModalHandler}>
+            <h4>Add Unit</h4>
+        </div>
+        <h3>{armyName}</h3>
+        </>}
 
     {showArmiesModal && <ArmiesModal onCloseModal={onCloseModalHandler}/>}
 
-    {loadedArmy && <ArmyList />}
-    
-  
-  
+    {armyLoaded && <ArmyList />}
+    </container>
   </>
   )
 };

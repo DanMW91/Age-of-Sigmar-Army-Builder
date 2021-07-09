@@ -71,6 +71,7 @@ export const AuthContextProvider = (props) => {
   const [userId, setUserId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [userArmy, dispatchUserArmy] = useReducer(armyReducer, {});
+  const [armyLoaded, setArmyLoaded] = useState(false)
 
   const userIsLoggedIn = !!token;
 
@@ -81,7 +82,7 @@ export const AuthContextProvider = (props) => {
       type: "LOAD-ARMY",
       val: army,
     });
-    
+    setArmyLoaded(true)
   }
 
   const loginHandler = (token, userId, name) => {
@@ -222,7 +223,8 @@ export const AuthContextProvider = (props) => {
     setLoading: setLoadingHandler,
     addBattalion: addBattalionHandler,
     deleteBattalion: deleteBattalionHandler,
-    setArmy: setArmyHandler
+    setArmy: setArmyHandler,
+    armyLoaded
   };
 
   return (

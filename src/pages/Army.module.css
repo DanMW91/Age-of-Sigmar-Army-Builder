@@ -16,3 +16,10 @@
   .button:active {
     box-shadow: 1px 1px rgb(35, 96, 124);
   }
+
+  .armyContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
