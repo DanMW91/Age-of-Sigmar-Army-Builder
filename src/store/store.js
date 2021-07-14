@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect, useRef } from "react";
 import { storeArmy } from "../firebase-api/firebase-api";
 import produce from "immer";
 
@@ -13,8 +13,6 @@ const AuthContext = React.createContext({
   logout: () => {},
   addUnit: () => {},
 });
-
-let userName;
 
 const armyReducer = (state, action) =>
   produce(state, (draft) => {
@@ -69,26 +67,26 @@ export const AuthContextProvider = (props) => {
   const [userId, setUserId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [userArmy, dispatchUserArmy] = useReducer(armyReducer, {});
-  const [armyLoaded, setArmyLoaded] = useState(false)
+  const [armyLoaded, setArmyLoaded] = useState(false);
+  const userNameRef = useRef("");
 
   const userIsLoggedIn = !!token;
 
-
   const setArmyHandler = (army) => {
-
     dispatchUserArmy({
       type: "LOAD-ARMY",
       val: army,
     });
-    setArmyLoaded(true)
-  }
+    setArmyLoaded(true);
+  };
 
   const loginHandler = (token, userId, name) => {
+    console.log(name);
     setUserId(userId);
     setToken(token);
 
     setIsLoading(true);
-    userName = name;
+    userNameRef.current = name;
 
     setIsLoading(false);
   };
@@ -118,19 +116,18 @@ export const AuthContextProvider = (props) => {
   };
 
   const addUnitHandler = (unitObj) => {
-  if(unitObj.current.type)
-    dispatchUserArmy({
-      type: "ADD-UNIT",
-      unitType: unitObj.current.type,
-      unit: unitObj.current.unit,
-    });
-    if(unitObj.current.unitType)
-    dispatchUserArmy({
-      type: "ADD-UNIT",
-      unitType: unitObj.current.unitType,
-      unit: unitObj.current,
-    });
-  
+    if (unitObj.current.type)
+      dispatchUserArmy({
+        type: "ADD-UNIT",
+        unitType: unitObj.current.type,
+        unit: unitObj.current.unit,
+      });
+    if (unitObj.current.unitType)
+      dispatchUserArmy({
+        type: "ADD-UNIT",
+        unitType: unitObj.current.unitType,
+        unit: unitObj.current,
+      });
   };
 
   const addToBattalionHelperFn = (unitTypeArr, unitType, battalionObj) => {
@@ -212,7 +209,7 @@ export const AuthContextProvider = (props) => {
     token: token,
     userId: userId,
     userArmy: userArmy,
-    userName: userName,
+    userName: userNameRef.current,
     isLoggedIn: userIsLoggedIn,
     isLoading,
     login: loginHandler,
@@ -223,7 +220,7 @@ export const AuthContextProvider = (props) => {
     addBattalion: addBattalionHandler,
     deleteBattalion: deleteBattalionHandler,
     setArmy: setArmyHandler,
-    armyLoaded
+    armyLoaded,
   };
 
   return (

@@ -136,8 +136,6 @@ const BattalionUnitSelect = React.forwardRef((props, ref) => {
     }
   }, [battalionState, showAddBattalion]);
 
-  useLayoutEffect(() => {});
-
   useLayoutEffect(() => {
     dispatchBattalionState({
       type: "REFRESH-BATTALION",

@@ -218,10 +218,19 @@ export const loginUser = async (enteredEmail, enteredPassword) => {
     if (!response.ok) {
       throw new Error(results.error.message);
     }
-
     const { localId: userId, idToken: token } = results;
 
-    return { userId, token };
+    const userNameResponse = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/userName.json?auth=${token}`
+    );
+
+    const userNameResult = await userNameResponse.json();
+    console.log(userNameResult);
+    if (!userNameResponse.ok) {
+      throw new Error(results.error.message);
+    }
+
+    return { userId, token, userNameResult };
   } catch (err) {
     throw new Error(err.message);
   }
@@ -277,6 +286,47 @@ export const storeNewUnit = async (userId, token, unitObj, unitType) => {
     const result = await response.json();
     if (!response.ok) {
       throw new Error(result.error.message);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createGroup = async (
+  userId,
+  token,
+  userName,
+  groupName,
+  groupId
+) => {
+  try {
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/groups/${groupId}.json?auth=${token}`,
+      {
+        method: "POST",
+        body: JSON.stringify(groupName, groupId),
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error.message);
+    }
+
+    const res = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}.json?auth=${token}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          groupName,
+          groupId,
+          members: [{ userId, userName }],
+        }),
+      }
+    );
+    const groupResponse = await res.json();
+    console.log(groupResponse);
+    if (!res.ok) {
+      throw new Error(groupResponse.error);
     }
   } catch (err) {
     console.error(err);

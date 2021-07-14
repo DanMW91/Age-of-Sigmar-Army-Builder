@@ -5,28 +5,6 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import { loginUser, registerUser } from "../../firebase-api/firebase-api";
 import classes from "./LoginForm.module.css";
 
-const armySkeleton = {
-  allegience: "",
-  activeBattalions: [0],
-  allUnits: {
-    leaders: [0],
-    battleline: [0],
-    artillery: [0],
-    monsters: [0],
-    behemoths: [0],
-    other: [0],
-  },
-
-  units: {
-    leaders: [0],
-    battleline: [0],
-    artillery: [0],
-    monsters: [0],
-    behemoths: [0],
-    other: [0],
-  },
-};
-
 const LoginForm = () => {
   const [loggingIn, setLogggingIn] = useState(true);
   const [error, setError] = useState(null);
@@ -69,7 +47,7 @@ const LoginForm = () => {
         enteredPassword,
         enteredUserName
       );
-      authCtx.login(token, userId, armySkeleton);
+      authCtx.login(token, userId, enteredUserName);
       authCtx.setLoading(false);
     } catch (error) {
       authCtx.setLoading(false);
@@ -84,9 +62,12 @@ const LoginForm = () => {
     const enteredPassword = passwordInputRef.current.value;
     authCtx.setLoading(true);
     try {
-      const { userId, token } = await loginUser(enteredEmail, enteredPassword);
-
-      authCtx.login(token, userId);
+      const { userId, token, userNameResult } = await loginUser(
+        enteredEmail,
+        enteredPassword
+      );
+      console.log(userNameResult);
+      authCtx.login(token, userId, userNameResult);
       authCtx.setLoading(false);
     } catch (err) {
       setError(err.message);
