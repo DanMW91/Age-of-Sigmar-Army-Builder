@@ -301,10 +301,10 @@ export const createGroup = async (
 ) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/groups/${groupId}.json?auth=${token}`,
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/groups/.json?auth=${token}`,
       {
         method: "POST",
-        body: JSON.stringify(groupName, groupId),
+        body: JSON.stringify({ groupId, groupName }),
       }
     );
     const result = await response.json();
@@ -328,6 +328,24 @@ export const createGroup = async (
     if (!res.ok) {
       throw new Error(groupResponse.error);
     }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const fetchGroups = async (userId, token) => {
+  try {
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/groups.json?auth=${token}`
+    );
+    const groupsData = await response.json();
+    console.log(response);
+    console.log(groupsData);
+    if (!response.ok) {
+      throw new Error(response);
+    }
+
+    return groupsData;
   } catch (err) {
     console.error(err);
   }

@@ -1,6 +1,17 @@
 .groupList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   width: 20%;
   height: 98%;
   background: rgb(113, 170, 207);
   border: solid;
+}
+.groupItem {
+  width: 92%;
+  height: 10%;
+
+  margin-top: 1%;
+  background: rgb(61, 146, 202);
 }
