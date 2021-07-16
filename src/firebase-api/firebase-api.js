@@ -418,6 +418,23 @@ export const fetchGroupReqs = async (userId, token) => {
   }
 };
 
+export const deleteGroupRequest = async (userId, groupId, token) => {
+  try {
+    const deleteResponse = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}/${groupId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const deleteResult = deleteResponse.json();
+    if (!deleteResponse.ok) {
+      throw new Error(deleteResult);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const addUserToGroup = async (
   userId,
   userName,
@@ -462,18 +479,7 @@ export const addUserToGroup = async (
 
     // deleting the group request
 
-    const deleteResponse = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}/${groupId}.json?auth=${token}`,
-      {
-        method: "DELETE",
-      }
-    );
-    const deleteResult = deleteResponse.json();
-    if (!deleteResponse.ok) {
-      throw new Error(deleteResult);
-    }
-
-    console.log(newGroupsObj);
+    deleteGroupRequest(userId, groupId, token);
   } catch (err) {
     console.error(err);
   }

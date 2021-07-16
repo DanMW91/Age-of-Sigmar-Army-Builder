@@ -33,6 +33,7 @@ const GroupList = () => {
         <input id="groupName" type="text" ref={groupNameRef} required />
         <button type="submit">+ Create Group</button>
       </form>
+      <h3>My Groups:</h3>
       {groupsArray &&
         groupsArray.map((group) => {
           return (
