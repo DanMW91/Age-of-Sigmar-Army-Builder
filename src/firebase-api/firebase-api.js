@@ -405,7 +405,6 @@ export const sendGroupRequest = async (token, groupId, userName, groupName) => {
 
 export const fetchGroupReqs = async (userId, token) => {
   try {
-    console.log("hi");
     const response = await fetch(
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}.json?auth=${token}`
     );
@@ -414,6 +413,67 @@ export const fetchGroupReqs = async (userId, token) => {
     if (!res) return;
     const groupReqs = Object.values(res);
     return groupReqs;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const addUserToGroup = async (
+  userId,
+  userName,
+  token,
+  groupId,
+  groupName
+) => {
+  try {
+    // retrieving existing group data in order to modify
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/groups/.json?auth=${token}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ groupId, groupName }),
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error.message);
+    }
+    const groupData = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}.json?auth=${token}`
+    );
+
+    const fetchedGroups = await groupData.json();
+
+    // Adding new user to the group members array and storing the new user group in firebase database
+
+    const newGroupsObj = Object.values(fetchedGroups)[0];
+
+    newGroupsObj.members.push({ userId, userName });
+
+    const res = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}.json?auth=${token}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ group: newGroupsObj }),
+      }
+    );
+    const groupRes = await res.json();
+    if (!res.ok) throw new Error(groupRes);
+
+    // deleting the group request
+
+    const deleteResponse = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}/${groupId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const deleteResult = deleteResponse.json();
+    if (!deleteResponse.ok) {
+      throw new Error(deleteResult);
+    }
+
+    console.log(newGroupsObj);
   } catch (err) {
     console.error(err);
   }

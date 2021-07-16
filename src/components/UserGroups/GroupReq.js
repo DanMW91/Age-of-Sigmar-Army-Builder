@@ -21,7 +21,9 @@ const GroupReq = () => {
     <div className={classes.requestsContainer}>
       <div>Requests: {numRequests}</div>
       {showRequests &&
-        groupsCtx.groupReqs.map((request) => <GroupRequestItem />)}
+        groupsCtx.groupReqs.map((request) => (
+          <GroupRequestItem key={Math.random()} groupRequest={request} />
+        ))}
     </div>
   );
 };

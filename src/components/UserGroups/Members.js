@@ -33,6 +33,7 @@ const Members = () => {
 
   return (
     <div className={classes.membersList}>
+      <h3>{Object.values(groupsCtx.activeGroup)[0].groupName}</h3>
       <form onSubmit={sendGroupRequestHandler}>
         <label htmlFor="userName">User Name:</label>
         <input id="userName" type="text" required ref={sendReqUserNameRef} />
