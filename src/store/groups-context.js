@@ -3,12 +3,14 @@ import React, { useState, useCallback } from "react";
 const GroupsContext = React.createContext({
   allGroups: {},
   activeGroup: {},
+  groupReqs: {},
 });
 
 export const GroupsContextProvider = (props) => {
   const [allGroups, setAllGroups] = useState();
   const [activeGroup, setActiveGroup] = useState();
-  const [groupRequests, setGroupRequests] = useState();
+  const [groupReqs, setGroupReqs] = useState();
+
   const setGroups = useCallback((groups) => {
     setAllGroups(groups);
   }, []);
@@ -17,9 +19,15 @@ export const GroupsContextProvider = (props) => {
     setActiveGroup(group);
   };
 
+  const setReqs = useCallback((groupRequests) => {
+    setGroupReqs(groupRequests);
+  }, []);
+
   const contextValue = {
     allGroups,
     activeGroup,
+    groupReqs,
+    setReqs,
     setGroups,
     setGroup,
   };

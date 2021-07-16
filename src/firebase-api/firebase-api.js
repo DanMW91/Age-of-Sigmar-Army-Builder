@@ -340,8 +340,7 @@ export const fetchGroups = async (userId, token) => {
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/groups.json?auth=${token}`
     );
     const groupsData = await response.json();
-    console.log(response);
-    console.log(groupsData);
+
     if (!response.ok) {
       throw new Error(response);
     }
@@ -360,7 +359,6 @@ export const fetchActiveGroup = async (token, groupId) => {
     const groupData = await response.json();
 
     if (!response.ok) {
-      console.log(response);
       throw new Error(response);
     }
 
@@ -370,7 +368,7 @@ export const fetchActiveGroup = async (token, groupId) => {
   }
 };
 
-export const sendGroupRequest = async (token, groupId, userName) => {
+export const sendGroupRequest = async (token, groupId, userName, groupName) => {
   try {
     console.log(token);
     console.log(userName);
@@ -378,6 +376,7 @@ export const sendGroupRequest = async (token, groupId, userName) => {
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers/${userName}.json?auth=${token}`
     );
     const userIdObj = await response.json();
+    if (!userIdObj) throw new Error("no such user!");
     const userId = Object.values(userIdObj)[0].userId;
     console.log(userId);
 
@@ -394,10 +393,27 @@ export const sendGroupRequest = async (token, groupId, userName) => {
         method: "POST",
         body: JSON.stringify({
           groupId,
+          groupName,
         }),
       }
     );
     if (!groupReq.ok) throw new Error(groupReq);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const fetchGroupReqs = async (userId, token) => {
+  try {
+    console.log("hi");
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}.json?auth=${token}`
+    );
+
+    const res = await response.json();
+    if (!res) return;
+    const groupReqs = Object.values(res);
+    return groupReqs;
   } catch (err) {
     console.error(err);
   }

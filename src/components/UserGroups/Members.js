@@ -13,6 +13,9 @@ const Members = () => {
 
   const sendGroupRequestHandler = (e) => {
     e.preventDefault();
+
+    const groupName = Object.values(groupsCtx.activeGroup)[0].groupName;
+
     const groupUsers = Object.values(groupsCtx.activeGroup)[0].members.map(
       (user) => user.userName
     );
@@ -20,7 +23,12 @@ const Members = () => {
     console.log("got past");
     const token = authCtx.token;
     const groupId = Object.values(groupsCtx.activeGroup)[0].groupId;
-    sendGroupRequest(token, groupId, sendReqUserNameRef.current.value);
+    sendGroupRequest(
+      token,
+      groupId,
+      sendReqUserNameRef.current.value,
+      groupName
+    );
   };
 
   return (

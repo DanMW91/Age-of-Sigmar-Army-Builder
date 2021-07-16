@@ -1,7 +1,7 @@
 import { useLayoutEffect, useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import GroupsContext from "../../store/groups-context";
-import { fetchGroups } from "../../firebase-api/firebase-api";
+import { fetchGroupReqs, fetchGroups } from "../../firebase-api/firebase-api";
 import GroupList from "./GroupList";
 import GroupDetail from "./GroupDetail";
 import Card from "../UI/Card";
@@ -11,6 +11,7 @@ const UserGroupsMain = () => {
   const [showGroups, setShowGroups] = useState(false);
   const groupsCtx = useContext(GroupsContext);
   const setGroups = groupsCtx.setGroups;
+  const setGroupReqs = groupsCtx.setReqs;
   const authCtx = useContext(AuthContext);
   const userId = authCtx.userId;
   const token = authCtx.token;
@@ -20,14 +21,20 @@ const UserGroupsMain = () => {
 
     (async () => {
       const groups = await fetchGroups(userId, token);
-      if (mounted) setGroups(groups);
-      setShowGroups(true);
+      const groupReqs = await fetchGroupReqs(userId, token);
+      if (mounted) {
+        setGroups(groups);
+        setGroupReqs(groupReqs);
+        setShowGroups(true);
+      }
     })();
 
     return function cleanup() {
       mounted = false;
     };
-  }, [userId, token, setGroups]);
+  }, [userId, token, setGroups, setGroupReqs]);
+
+  console.log(groupsCtx.groupReqs);
 
   return (
     <Card className={classes.card}>

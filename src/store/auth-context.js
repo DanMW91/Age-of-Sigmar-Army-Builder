@@ -112,7 +112,6 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = () => {
     setUserId(null);
     setToken(null);
-    userArmy = {};
   };
 
   const addUnitHandler = (unitObj) => {
