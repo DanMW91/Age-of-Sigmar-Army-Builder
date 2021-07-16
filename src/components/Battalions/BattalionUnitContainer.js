@@ -2,7 +2,7 @@ import Card from "../UI/Card";
 import BattalionUnit from "./BattalionUnit";
 import classes from "./BattalionUnitContainer.module.css";
 import { useContext } from "react";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 
 const BattalionUnitContainer = (props) => {
   const authCtx = useContext(AuthContext);

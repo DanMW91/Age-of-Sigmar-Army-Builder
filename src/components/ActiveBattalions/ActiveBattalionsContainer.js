@@ -1,6 +1,6 @@
 import Card from "../UI/Card";
 import classes from "./ActiveBattalionsContainer.module.css";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 import { useContext } from "react";
 import ActiveBattalion from "./ActiveBattalion";
 

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import AuthContext from "../..//store/store";
+import AuthContext from "../../store/auth-context";
 import classes from "./ActiveBattalion.module.css";
 import Card from "../UI/Card";
 import { battalions } from "../Battalions/BattalionsMain";

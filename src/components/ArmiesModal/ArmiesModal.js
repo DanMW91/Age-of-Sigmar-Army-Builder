@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { useContext, useState, useRef, useLayoutEffect } from "react";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 import Modal from "../UI/Modal";
 import ArmiesList from "./ArmiesList";
 import { createNewArmy, retrieveArmies } from "../../firebase-api/firebase-api";

@@ -1,6 +1,6 @@
 import { useContext, useRef } from "react";
 import Card from "../UI/Card";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 
 import classes from "./UnitSelectUnit.module.css";
 
@@ -12,7 +12,7 @@ const UnitSelectUnit = (props) => {
     const newUnitObj = JSON.parse(JSON.stringify(unitObjRef));
 
     newUnitObj.current.id = Math.random();
-    console.log(newUnitObj)
+    console.log(newUnitObj);
     authCtx.addUnit(newUnitObj);
   };
 

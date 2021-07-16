@@ -4,7 +4,7 @@ import Header from "../components/Header/Header";
 import ArmyList from "../components/ArmyList/ArmyList";
 import AddUnitModal from "../components/AddUnits/AddUnitModal";
 import ArmiesModal from "../components/ArmiesModal/ArmiesModal";
-import AuthContext from "../store/store";
+import AuthContext from "../store/auth-context";
 
 const Army = () => {
   const authCtx = useContext(AuthContext);

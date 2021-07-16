@@ -1,5 +1,5 @@
 import { useRef, useState, useContext } from "react";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { loginUser, registerUser } from "../../firebase-api/firebase-api";

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Auth from "./pages/Auth";
 import Army from "./pages/Army";
 import Groups from "./pages/Groups";
-import AuthContext from "./store/store";
+import AuthContext from "./store/auth-context";
 import Layout from "./components/UI/Layout";
 import Battalions from "./pages/Battalions";
 

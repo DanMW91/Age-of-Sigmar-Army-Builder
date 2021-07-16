@@ -2,7 +2,7 @@ import produce from "immer";
 import React from "react";
 import Card from "../UI/Card";
 import BattalionUnitContainer from "./BattalionUnitContainer";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 import classes from "./BattalionUnitSelect.module.css";
 import {
   useContext,

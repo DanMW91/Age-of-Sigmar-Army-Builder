@@ -1,0 +1,34 @@
+.groupDetail {
+  display: flex;
+  flex-direction: column;
+
+  width: 70%;
+  height: 98%;
+  background: rgb(113, 170, 207);
+  margin-left: 5%;
+  box-shadow: 0 0 6px rgb(0, 0, 0);
+}
+
+.detailNav {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 10%;
+  background: rgb(72, 105, 128);
+}
+
+.detailNavItem {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  width: 35%;
+  font-size: 1.5em;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.active {
+  background: rgb(113, 170, 207);
+}

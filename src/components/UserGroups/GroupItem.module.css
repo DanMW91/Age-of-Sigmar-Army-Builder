@@ -1,0 +1,13 @@
+.groupItem {
+  width: 92%;
+  height: 10%;
+  border-radius: 0;
+  margin-top: 1%;
+  background: rgb(61, 146, 202);
+  transition: transform 0.2s;
+}
+
+.groupItem:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}

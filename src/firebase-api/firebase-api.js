@@ -96,11 +96,10 @@ export const storeUserName = async (userId, userName, token) => {
       throw new Error(result.error.message);
     }
     const res = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers.json?auth=${token}`,
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers/${userName}.json?auth=${token}`,
       {
         method: "POST",
         body: JSON.stringify({
-          userName: userName,
           userId: userId,
         }),
       }
@@ -120,8 +119,10 @@ const checkUserNameIsUnique = async (userName) => {
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers.json`
     );
     const userNames = await userData.json();
+
     if (!userNames) return;
-    const formattedNames = Object.values(userNames).map((user) =>
+    console.log(Object.keys(userNames));
+    const formattedNames = Object.keys(userNames).map((user) =>
       user.toLowerCase()
     );
 
@@ -346,6 +347,57 @@ export const fetchGroups = async (userId, token) => {
     }
 
     return groupsData;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const fetchActiveGroup = async (token, groupId) => {
+  try {
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}.json?auth=${token}`
+    );
+    const groupData = await response.json();
+
+    if (!response.ok) {
+      console.log(response);
+      throw new Error(response);
+    }
+
+    return groupData;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const sendGroupRequest = async (token, groupId, userName) => {
+  try {
+    console.log(token);
+    console.log(userName);
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers/${userName}.json?auth=${token}`
+    );
+    const userIdObj = await response.json();
+    const userId = Object.values(userIdObj)[0].userId;
+    console.log(userId);
+
+    const checkGrp = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}/${groupId}.json?auth=${token}`
+    );
+    const reqExists = await checkGrp.json();
+    console.log(reqExists);
+    if (reqExists) throw new Error("Already invited");
+
+    const groupReq = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}/${groupId}.json?auth=${token}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          groupId,
+        }),
+      }
+    );
+    if (!groupReq.ok) throw new Error(groupReq);
   } catch (err) {
     console.error(err);
   }

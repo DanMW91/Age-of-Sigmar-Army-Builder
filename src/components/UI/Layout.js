@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Navbar from "../Navbar/Navbar";
 import LoadingSpinner from "./LoadingSpinner";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 
 const Layout = (props) => {
   const authCtx = useContext(AuthContext);

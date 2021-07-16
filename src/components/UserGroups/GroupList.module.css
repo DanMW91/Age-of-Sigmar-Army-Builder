@@ -6,12 +6,6 @@
   width: 20%;
   height: 98%;
   background: rgb(113, 170, 207);
-  border: solid;
-}
-.groupItem {
-  width: 92%;
-  height: 10%;
-
-  margin-top: 1%;
-  background: rgb(61, 146, 202);
+  margin-left: 2%;
+  box-shadow: 0 0 6px rgb(0, 0, 0);
 }
