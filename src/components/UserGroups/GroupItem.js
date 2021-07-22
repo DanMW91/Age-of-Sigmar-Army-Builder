@@ -9,7 +9,6 @@ const GroupItem = (props) => {
   const authCtx = useContext(AuthContext);
   const groupsCtx = useContext(GroupsContext);
 
-  console.log(props);
   const groupId = props.groupId;
 
   const setActiveGroupHandler = async () => {

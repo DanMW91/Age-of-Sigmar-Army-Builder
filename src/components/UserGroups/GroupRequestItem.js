@@ -1,14 +1,18 @@
 import Card from "../UI/Card";
 import { useRef, useContext } from "react";
 import AuthContext from "../../store/auth-context";
+import GroupsContext from "../../store/groups-context";
 import {
   addUserToGroup,
   deleteGroupRequest,
+  fetchGroups,
 } from "../../firebase-api/firebase-api";
 import classes from "./GroupRequestItem.module.css";
 
 const GroupRequestItem = (props) => {
   const authCtx = useContext(AuthContext);
+  const groupsCtx = useContext(GroupsContext);
+  const setGroups = groupsCtx.setGroups;
   const groupIdRef = useRef(Object.values(props.groupRequest)[0].groupId);
   const groupNameRef = useRef(Object.values(props.groupRequest)[0].groupName);
 
@@ -19,7 +23,11 @@ const GroupRequestItem = (props) => {
     const groupId = groupIdRef.current;
     const groupName = groupNameRef.current;
 
-    addUserToGroup(userId, userName, token, groupId, groupName);
+    await addUserToGroup(userId, userName, token, groupId, groupName);
+
+    await props.onRespond();
+    const updatedGroups = await fetchGroups(userId, token);
+    setGroups(updatedGroups);
   };
 
   const rejectHandler = async () => {
@@ -28,6 +36,7 @@ const GroupRequestItem = (props) => {
     const token = authCtx.token;
 
     await deleteGroupRequest(userId, groupId, token);
+    await props.onRespond();
   };
 
   return (

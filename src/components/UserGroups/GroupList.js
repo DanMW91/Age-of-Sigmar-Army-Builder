@@ -18,7 +18,6 @@ const GroupList = (props) => {
   const setGroups = groupsCtx.setGroups;
 
   useLayoutEffect(() => {
-    console.log("in the effect");
     const groups = groupsCtx.allGroups
       ? Object.values(groupsCtx.allGroups)
       : "";

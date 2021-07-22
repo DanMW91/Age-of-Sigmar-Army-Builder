@@ -57,7 +57,6 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
     const result = await response.json();
 
     if (!response.ok) {
-      console.log(result);
       throw new Error(response);
     }
 
@@ -72,7 +71,6 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
       }
     );
     if (!res.ok) {
-      console.log(res);
       throw new Error(res);
     }
   } catch (err) {
@@ -121,7 +119,7 @@ const checkUserNameIsUnique = async (userName) => {
     const userNames = await userData.json();
 
     if (!userNames) return;
-    console.log(Object.keys(userNames));
+
     const formattedNames = Object.keys(userNames).map((user) =>
       user.toLowerCase()
     );
@@ -226,7 +224,7 @@ export const loginUser = async (enteredEmail, enteredPassword) => {
     );
 
     const userNameResult = await userNameResponse.json();
-    console.log(userNameResult);
+
     if (!userNameResponse.ok) {
       throw new Error(results.error.message);
     }
@@ -273,7 +271,7 @@ export const retrieveUnits = async (userId, token) => {
 
 export const storeNewUnit = async (userId, token, unitObj, unitType) => {
   let unitsArray = await retrieveUnits(userId, token);
-  console.log(unitsArray);
+
   unitsArray[`${unitType}`].push(unitObj);
 
   try {
@@ -325,9 +323,6 @@ export const createGroup = async (
       }
     );
     const groupResponse = await res.json();
-    
-
-  
 
     if (!res.ok) {
       throw new Error(groupResponse.error);
@@ -373,21 +368,18 @@ export const fetchActiveGroup = async (token, groupId) => {
 
 export const sendGroupRequest = async (token, groupId, userName, groupName) => {
   try {
-    console.log(token);
-    console.log(userName);
     const response = await fetch(
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers/${userName}.json?auth=${token}`
     );
     const userIdObj = await response.json();
     if (!userIdObj) throw new Error("no such user!");
     const userId = Object.values(userIdObj)[0].userId;
-    console.log(userId);
 
     const checkGrp = await fetch(
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}/${groupId}.json?auth=${token}`
     );
     const reqExists = await checkGrp.json();
-    console.log(reqExists);
+
     if (reqExists) throw new Error("Already invited");
 
     const groupReq = await fetch(
@@ -482,7 +474,7 @@ export const addUserToGroup = async (
 
     // deleting the group request
 
-    deleteGroupRequest(userId, groupId, token);
+    await deleteGroupRequest(userId, groupId, token);
   } catch (err) {
     console.error(err);
   }
