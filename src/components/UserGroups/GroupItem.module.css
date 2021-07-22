@@ -1,4 +1,6 @@
 .groupItem {
+  display: flex;
+  justify-content: center;
   width: 92%;
   height: 10%;
   border-radius: 0;

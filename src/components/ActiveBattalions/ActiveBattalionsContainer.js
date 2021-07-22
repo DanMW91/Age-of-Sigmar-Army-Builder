@@ -13,7 +13,7 @@ const ActiveBattalions = () => {
       <div className={classes.containerHeader}>
         <h2>Active Battalions</h2>
       </div>
-      <div>
+      <div className={classes.activeBattalionsList}>
         {battalions.map((battalion) => {
           return (
             <ActiveBattalion

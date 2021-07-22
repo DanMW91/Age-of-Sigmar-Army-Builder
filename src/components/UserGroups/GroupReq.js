@@ -3,7 +3,7 @@ import GroupRequestItem from "./GroupRequestItem";
 import GroupsContext from "../../store/groups-context";
 import classes from "./GroupReq.module.css";
 
-const GroupReq = () => {
+const GroupReq = (props) => {
   const groupsCtx = useContext(GroupsContext);
   const [numRequests, setNumRequests] = useState(0);
   const [showRequests, setShowRequests] = useState(false);
@@ -22,7 +22,11 @@ const GroupReq = () => {
       <div>Requests: {numRequests}</div>
       {showRequests &&
         groupsCtx.groupReqs.map((request) => (
-          <GroupRequestItem key={Math.random()} groupRequest={request} />
+          <GroupRequestItem
+            toggleLoading={props.toggleLoading}
+            key={Math.random()}
+            groupRequest={request}
+          />
         ))}
     </div>
   );

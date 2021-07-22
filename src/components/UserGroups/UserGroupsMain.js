@@ -2,6 +2,7 @@ import { useLayoutEffect, useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import GroupsContext from "../../store/groups-context";
 import { fetchGroupReqs, fetchGroups } from "../../firebase-api/firebase-api";
+
 import GroupList from "./GroupList";
 import GroupDetail from "./GroupDetail";
 import Card from "../UI/Card";
@@ -33,8 +34,6 @@ const UserGroupsMain = () => {
       mounted = false;
     };
   }, [userId, token, setGroups, setGroupReqs]);
-
-  console.log(groupsCtx.groupReqs);
 
   return (
     <Card className={classes.card}>

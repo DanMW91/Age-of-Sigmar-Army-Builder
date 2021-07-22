@@ -325,7 +325,10 @@ export const createGroup = async (
       }
     );
     const groupResponse = await res.json();
-    console.log(groupResponse);
+    
+
+  
+
     if (!res.ok) {
       throw new Error(groupResponse.error);
     }

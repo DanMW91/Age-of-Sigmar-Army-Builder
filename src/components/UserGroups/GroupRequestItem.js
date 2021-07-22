@@ -12,7 +12,7 @@ const GroupRequestItem = (props) => {
   const groupIdRef = useRef(Object.values(props.groupRequest)[0].groupId);
   const groupNameRef = useRef(Object.values(props.groupRequest)[0].groupName);
 
-  const acceptHandler = () => {
+  const acceptHandler = async () => {
     const userId = authCtx.userId;
     const userName = authCtx.userName;
     const token = authCtx.token;
@@ -22,19 +22,19 @@ const GroupRequestItem = (props) => {
     addUserToGroup(userId, userName, token, groupId, groupName);
   };
 
-  const rejectHandler = () => {
+  const rejectHandler = async () => {
     const userId = authCtx.userId;
     const groupId = groupIdRef.current;
     const token = authCtx.token;
 
-    deleteGroupRequest(userId, groupId, token);
+    await deleteGroupRequest(userId, groupId, token);
   };
 
   return (
     <Card>
       <div className={classes.requestItem}>
         <div>{groupNameRef.current}</div>
-        <button onClick={acceptHandler}>Accept</button>{" "}
+        <button onClick={acceptHandler}>Accept</button>
         <button onClick={rejectHandler}>Reject</button>
       </div>
     </Card>

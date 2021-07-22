@@ -14,3 +14,7 @@
   background-color: rgb(30, 78, 110);
   color: aliceblue;
 }
+
+.activeBattalionsList {
+  display: flex;
+}

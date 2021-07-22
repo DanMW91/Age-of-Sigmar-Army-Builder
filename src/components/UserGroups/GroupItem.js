@@ -20,7 +20,7 @@ const GroupItem = (props) => {
 
   return (
     <Card className={classes.groupItem} onClick={setActiveGroupHandler}>
-      {props.groupName}
+      <h3>{props.groupName}</h3>
     </Card>
   );
 };
