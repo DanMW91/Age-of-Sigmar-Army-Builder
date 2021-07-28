@@ -66,7 +66,7 @@ const LoginForm = () => {
         enteredEmail,
         enteredPassword
       );
-      console.log(userNameResult);
+
       authCtx.login(token, userId, userNameResult);
       authCtx.setLoading(false);
     } catch (err) {

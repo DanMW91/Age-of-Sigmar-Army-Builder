@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  background: rgb(24, 117, 179);
+  background: #015178;
   height: 3vw;
 }
 
@@ -16,20 +16,22 @@
   display: flex;
   margin-right: 5px;
   height: 100%;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   justify-content: center;
   align-items: center;
   list-style-type: none;
 
   width: 20%;
-  background: rgb(123, 184, 224);
+  background: #3b87a6;
 }
 
 .navbar a {
   display: flex;
 
   line-height: 50%;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   justify-content: center;
   align-items: center;
   text-decoration: none;
@@ -37,5 +39,5 @@
   height: 100%;
 }
 .navbar .active {
-  background: #777777;
+  background: #cfcfb8;
 }

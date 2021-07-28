@@ -198,14 +198,17 @@ const BattalionUnitSelect = React.forwardRef((props, ref) => {
             onToggleUnit={toggleUnitHandler}
           />
         )}
-      {authCtx.userArmy.units?.battleline[1] && battalionState?.troops && (
-        <BattalionUnitContainer
-          battalionObj={battalionState}
-          battalionName={battalion.name}
-          containerType={"Troops"}
-          onToggleUnit={toggleUnitHandler}
-        />
-      )}
+      {(authCtx.userArmy.units?.battleline[1] ||
+        authCtx.userArmy.units?.other[1]) &&
+        battalionState?.troops && (
+          <BattalionUnitContainer
+            battalionObj={battalionState}
+            battalionName={battalion.name}
+            containerType={"Troops"}
+            onToggleUnit={toggleUnitHandler}
+            otherPresent={authCtx.userArmy.units?.other[1] ? true : false}
+          />
+        )}
       {authCtx.userArmy.units?.monsters[1] && battalionState?.monsters && (
         <BattalionUnitContainer
           battalionObj={battalionState}
@@ -222,6 +225,7 @@ const BattalionUnitSelect = React.forwardRef((props, ref) => {
           onToggleUnit={toggleUnitHandler}
         />
       )}
+
       {showAddBattalion && (
         <div onClick={addBattalionHandler} className={classes.button}>
           <h3>Add Battalion</h3>

@@ -38,7 +38,6 @@ const UserGroupsMain = () => {
   return (
     <Card className={classes.card}>
       <section className={classes.mainContainer}>
-        <div className={classes.groupsHeader}>My Groups</div>
         <div className={classes.groupsContent}>
           {showGroups && <GroupList />}
           {groupsCtx.activeGroup && <GroupDetail />}

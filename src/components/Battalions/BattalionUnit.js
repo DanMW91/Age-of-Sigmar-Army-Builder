@@ -16,7 +16,10 @@ const BattalionUnit = (props) => {
   const unitSpentRef = useRef();
 
   useLayoutEffect(() => {
-    unitTypeRef.current = props.type === "battleline" ? "troops" : props.type;
+    unitTypeRef.current =
+      props.type === "battleline" || props.type === "other"
+        ? "troops"
+        : props.type;
 
     if (
       (!battalionObj.leaders || !battalionObj.leaders.required === 0) &&
@@ -120,8 +123,15 @@ const BattalionUnit = (props) => {
           displayLeaderSelection ? classes.leaderSelect : classes.hidden
         }
       >
-        <span onClick={chooseCommanderLeaderHandler}>Commander</span>
-        <span onClick={chooseCommanderLeaderHandler}>Leader</span>
+        <div
+          className={classes.commander}
+          onClick={chooseCommanderLeaderHandler}
+        >
+          Commander
+        </div>
+        <div className={classes.leader} onClick={chooseCommanderLeaderHandler}>
+          Leader
+        </div>
       </div>
 
       <h3>{props.unitObj.name}</h3>

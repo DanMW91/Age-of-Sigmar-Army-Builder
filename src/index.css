@@ -4,7 +4,7 @@ body {
   font-family: "Cinzel", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(to top left, #b8b7b7, #777777) fixed;
+  background: #cfcfb8 fixed;
   overflow: scroll;
   padding-top: 0px;
   height: 100%;
@@ -25,5 +25,6 @@ code {
 }
 html {
   height: 100%;
+
   overscroll-behavior: none;
 }

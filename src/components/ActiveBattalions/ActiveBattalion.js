@@ -7,7 +7,7 @@ import { battalions } from "../Battalions/BattalionsMain";
 const ActiveBattalion = (props) => {
   const authCtx = useContext(AuthContext);
   const [battalionUnits, setBattalionUnits] = useState([]);
-
+  const [showDetails, setShowDetails] = useState();
   const [usedAbility, setUsedAbility] = useState(false);
 
   const allUnits = authCtx.userArmy.units;
@@ -17,6 +17,7 @@ const ActiveBattalion = (props) => {
   );
 
   const bonusesRef = useRef(currBattalionRef.current[0].bonuses);
+  const bonusTextRef = useRef(currBattalionRef.current[0].textArray);
 
   useEffect(() => {
     const unitTypeArray = ["leaders", "battleline", "monsters", "artillery"];
@@ -57,10 +58,25 @@ const ActiveBattalion = (props) => {
             ))}
           </ul>
         </div>
-        <div className={classes.battalionBonuses}>
+        <div
+          onClick={() => setUsedAbility((prevState) => !prevState)}
+          className={
+            usedAbility
+              ? classes.battalionBonusesUsed
+              : classes.battalionBonuses
+          }
+        >
           <h3>
+            <div className={showDetails ? classes.details : classes.hidden}>
+              {bonusTextRef.current}
+            </div>
             {bonusesRef.current.map((bonus) => (
-              <span>{bonus}</span>
+              <span
+                onMouseEnter={() => setShowDetails(true)}
+                onMouseLeave={() => setShowDetails(false)}
+              >
+                {bonus}
+              </span>
             ))}
           </h3>
           <button onClick={deleteBattalionHandler}>Delete</button>

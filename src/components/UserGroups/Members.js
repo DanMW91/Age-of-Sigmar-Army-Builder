@@ -9,6 +9,7 @@ const Members = () => {
   const authCtx = useContext(AuthContext);
   const groupsCtx = useContext(GroupsContext);
   const membersList = Object.values(groupsCtx.activeGroup)[0].members;
+
   const sendReqUserNameRef = useRef();
 
   const sendGroupRequestHandler = (e) => {
@@ -20,7 +21,7 @@ const Members = () => {
       (user) => user.userName
     );
     if (groupUsers.includes(sendReqUserNameRef.current.value)) return;
-    console.log("got past");
+
     const token = authCtx.token;
     const groupId = Object.values(groupsCtx.activeGroup)[0].groupId;
     sendGroupRequest(
@@ -34,13 +35,15 @@ const Members = () => {
   return (
     <div className={classes.membersList}>
       <h3>{Object.values(groupsCtx.activeGroup)[0].groupName}</h3>
-      <form onSubmit={sendGroupRequestHandler}>
-        <label htmlFor="userName">User Name:</label>
-        <input id="userName" type="text" required ref={sendReqUserNameRef} />
-        <button type="submit">Invite User</button>
-      </form>
+      {groupsCtx.isAdmin && (
+        <form onSubmit={sendGroupRequestHandler}>
+          <label htmlFor="userName">User Name:</label>
+          <input id="userName" type="text" required ref={sendReqUserNameRef} />
+          <button type="submit">Invite User</button>
+        </form>
+      )}
       {membersList.map((member) => (
-        <MemberItem userName={member.userName} />
+        <MemberItem userName={member.userName} admin={member.admin} />
       ))}
     </div>
   );

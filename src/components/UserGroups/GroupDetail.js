@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Members from "./Members";
+import BattleLogsContainer from "./BattleLogs/BattleLogsContainer";
 import classes from "./GroupDetail.module.css";
 
 const GroupDetail = () => {
@@ -33,6 +34,7 @@ const GroupDetail = () => {
           Battle Logs
         </div>
       </nav>
+      {displayPage === "BATTLE-LOGS" && <BattleLogsContainer />}
       {displayPage === "MEMBERS" && <Members />}
     </section>
   );

@@ -7,7 +7,7 @@ import AuthContext from "../../store/auth-context";
 const BattalionUnitContainer = (props) => {
   const authCtx = useContext(AuthContext);
   const userArmy = authCtx.userArmy.units;
-
+  console.log(props);
   const onToggleUnitHandler = (unitObj, type, action) => {
     props.onToggleUnit(unitObj, type, action);
   };
@@ -39,6 +39,20 @@ const BattalionUnitContainer = (props) => {
             }
           />
         ))}
+      {props.otherPresent &&
+        authCtx.userArmy?.units.other[1] &&
+        userArmy.other
+          .slice(1)
+          .filter((unit) => !unit.inBattalion) //filter out units that are in battalions already
+          .map((unit) => (
+            <BattalionUnit
+              battalionObj={props.battalionObj}
+              battalionName={props.battalionName}
+              onToggleUnit={onToggleUnitHandler}
+              unitObj={unit}
+              type={"other"}
+            />
+          ))}
     </Card>
   );
 };

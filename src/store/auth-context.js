@@ -30,6 +30,7 @@ const armyReducer = (state, action) =>
         ].filter((unit) => unit.id !== action.unitId || unit === 0);
 
         break;
+
       case "ADD-TO-BATTALION":
         draft.units[`${action.unitType}`][action.unitIndex].inBattalion =
           action.battalion;
@@ -80,8 +81,12 @@ export const AuthContextProvider = (props) => {
     setArmyLoaded(true);
   };
 
+  const unloadArmy = () => {
+    setArmyLoaded(false);
+  };
+
   const loginHandler = (token, userId, name) => {
-    console.log(name);
+   
     setUserId(userId);
     setToken(token);
 
@@ -219,6 +224,7 @@ export const AuthContextProvider = (props) => {
     addBattalion: addBattalionHandler,
     deleteBattalion: deleteBattalionHandler,
     setArmy: setArmyHandler,
+    unloadArmy,
     armyLoaded,
   };
 

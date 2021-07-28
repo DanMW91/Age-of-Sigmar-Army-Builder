@@ -19,12 +19,15 @@
   align-items: center;
   margin: auto;
   padding: 5px;
+  width: 100%;
 }
 .activeBattalion li {
   display: flex;
   justify-content: center;
   padding: 2%;
   text-align: center;
+
+  width: 100%;
 }
 
 .activeBattalion {
@@ -32,7 +35,7 @@
   flex-direction: column;
   width: 25%;
   height: 20vw;
-  background: rgb(0, 183, 255);
+  background: #cfcfb8;
 
   margin-top: 2%;
   margin-bottom: 2%;
@@ -60,7 +63,20 @@
   margin-top: auto;
   background: rgb(2, 68, 168);
 }
+.battalionBonusesUsed {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  background: rgb(71, 71, 71);
+}
 .battalionBonuses h3 {
+  border: 2px solid black;
+  padding: 3px;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+.battalionBonusesUsed h3 {
   border: 2px solid black;
   padding: 3px;
   margin-top: 6px;
@@ -77,4 +93,23 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  width: 100%;
+}
+
+.details {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  padding: 10px;
+  z-index: 10;
+  position: absolute;
+  color: rgb(207, 207, 207);
+  background: rgba(51, 51, 51, 0.877);
+  margin-left: 20px;
+  bottom: 20px;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
 }

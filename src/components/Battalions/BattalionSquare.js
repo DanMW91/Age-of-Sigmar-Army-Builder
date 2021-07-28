@@ -1,9 +1,11 @@
+import { useState } from "react";
 import BattalionSmallSquare from "./BattalionSmallSquare";
 
 import Card from "../UI/Card";
 import classes from "./BattalionSquare.module.css";
 
 const BattalionSquare = (props) => {
+  const [showDetails, setShowDetails] = useState(false);
   const units = props.units;
   const selectBattalionHandler = () => {
     props.onSelectBattalion(props.id);
@@ -71,10 +73,17 @@ const BattalionSquare = (props) => {
             ))}
         </div>
       </div>
+
       <div className={classes.battalionBonuses}>
         <h3>
+          <div className={showDetails ? classes.details : classes.hidden}>
+            {props.textArray}
+          </div>
           {props.bonuses.map((bonus, i) => (
-            <span>
+            <span
+              onMouseEnter={() => setShowDetails(true)}
+              onMouseLeave={() => setShowDetails(false)}
+            >
               {bonus}
               {bonus !== props.bonuses[props.bonuses.length - 1] && ", "}
             </span>

@@ -61,13 +61,10 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
     }
 
     const res = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allArmies.json?auth=${token}`,
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allArmies/${armyId}.json?auth=${token}`,
       {
         method: "POST",
-        body: JSON.stringify({
-          newArmyName,
-          armyId,
-        }),
+        body: JSON.stringify({ newArmyName, armyId }),
       }
     );
     if (!res.ok) {
@@ -252,6 +249,25 @@ export const retrieveArmies = async (userId, token) => {
   }
 };
 
+export const deleteArmy = async (userId, token, armyId) => {
+  try {
+    const deleteArmyResponse = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allArmies/${armyId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    const result = await deleteArmyResponse.json();
+
+    if (!deleteArmyResponse.ok) {
+      throw new Error(result);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const retrieveUnits = async (userId, token) => {
   try {
     const unitsData = await fetch(
@@ -270,16 +286,38 @@ export const retrieveUnits = async (userId, token) => {
 };
 
 export const storeNewUnit = async (userId, token, unitObj, unitType) => {
-  let unitsArray = await retrieveUnits(userId, token);
+  let units = await retrieveUnits(userId, token);
 
-  unitsArray[`${unitType}`].push(unitObj);
+  units[`${unitType}`].push(unitObj);
 
   try {
     const response = await fetch(
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits/.json?auth=${token}`,
       {
         method: "PUT",
-        body: JSON.stringify(unitsArray),
+        body: JSON.stringify(units),
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error.message);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const deleteUnit = async (userId, token, unitType, unitId) => {
+  try {
+    let allUnits = await retrieveUnits(userId, token);
+    const newArray = allUnits[unitType].filter((unit) => unit.id !== unitId);
+    allUnits[unitType] = newArray;
+
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits/.json?auth=${token}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(allUnits),
       }
     );
     const result = await response.json();
@@ -318,7 +356,7 @@ export const createGroup = async (
         body: JSON.stringify({
           groupName,
           groupId,
-          members: [{ userId, userName }],
+          members: [{ userId, userName, admin: true }],
         }),
       }
     );
@@ -460,13 +498,13 @@ export const addUserToGroup = async (
 
     const newGroupsObj = Object.values(fetchedGroups)[0];
 
-    newGroupsObj.members.push({ userId, userName });
+    newGroupsObj.members.push({ userId, userName, admin: false });
 
     const res = await fetch(
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}.json?auth=${token}`,
       {
         method: "PUT",
-        body: JSON.stringify({ group: newGroupsObj }),
+        body: JSON.stringify({ newGroupsObj }),
       }
     );
     const groupRes = await res.json();

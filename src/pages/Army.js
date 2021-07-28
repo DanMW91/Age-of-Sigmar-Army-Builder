@@ -53,17 +53,19 @@ const Army = () => {
       <Header />
 
       <section className={classes.armyContainer}>
-        <div className={classes.button} onClick={openArmiesModalHandler}>
-          <h4>Select Army</h4>
+        <div className={classes.buttonContainer}>
+          <div className={classes.button} onClick={openArmiesModalHandler}>
+            <h4>Select Army</h4>
+          </div>
+          {armyLoaded && (
+            <>
+              <div className={classes.button} onClick={openAddUnitModalHandler}>
+                <h4>Add Unit</h4>
+              </div>
+            </>
+          )}
         </div>
-        {armyLoaded && (
-          <>
-            <div className={classes.button} onClick={openAddUnitModalHandler}>
-              <h4>Add Unit</h4>
-            </div>
-            <h3>{armyName}</h3>
-          </>
-        )}
+        {armyLoaded && <h2>{armyName}</h2>}
 
         {showArmiesModal && <ArmiesModal onCloseModal={onCloseModalHandler} />}
 

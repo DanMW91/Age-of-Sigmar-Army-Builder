@@ -1,25 +1,28 @@
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid rgb(15, 63, 85);
-    width: 8vw;
-    height: 3vw;
-    background: rgb(24, 117, 179);
-    border-radius: 15px;
-    box-shadow: 4px 4px rgb(35, 96, 124);
-    margin-bottom: 10px;
-  }
-  .button:hover {
-    cursor: pointer;
-  }
-  .button:active {
-    box-shadow: 1px 1px rgb(35, 96, 124);
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(15, 63, 85);
+  width: 8vw;
+  height: 3vw;
+  background: rgb(24, 117, 179);
+  border-radius: 15px;
+  box-shadow: 4px 4px rgb(35, 96, 124);
+  margin-bottom: 10px;
+}
+.button:hover {
+  cursor: pointer;
+}
+.button:active {
+  box-shadow: 1px 1px rgb(35, 96, 124);
+}
+.buttonContainer {
+  display: flex;
+}
 
-  .armyContainer {
-      display: flex;
-      flex-direction: column;
-      
-      align-items: center;
-  }
+.armyContainer {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}

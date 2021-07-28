@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
+import AuthContext from "./auth-context";
 
 const GroupsContext = React.createContext({
   allGroups: {},
@@ -7,9 +8,25 @@ const GroupsContext = React.createContext({
 });
 
 export const GroupsContextProvider = (props) => {
+  const authCtx = useContext(AuthContext);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [allGroups, setAllGroups] = useState();
   const [activeGroup, setActiveGroup] = useState();
   const [groupReqs, setGroupReqs] = useState();
+
+  useEffect(() => {
+    if (!activeGroup) return;
+
+    //check if user is Admin for active group
+
+    const group = Object.values(activeGroup)[0];
+
+    const admin = group.members.filter(
+      (member) => member.userId === authCtx.userId
+    )[0].admin;
+
+    setIsAdmin(admin);
+  }, [activeGroup, authCtx.userId]);
 
   const setGroups = useCallback((groups) => {
     setAllGroups(groups);
@@ -24,6 +41,7 @@ export const GroupsContextProvider = (props) => {
   }, []);
 
   const contextValue = {
+    isAdmin,
     allGroups,
     activeGroup,
     groupReqs,
