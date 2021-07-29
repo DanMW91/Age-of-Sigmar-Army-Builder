@@ -4,14 +4,17 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./store/auth-context";
+import { NotificationsContextProvider } from "./store/notifcations-context";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <NotificationsContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </NotificationsContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById("root")

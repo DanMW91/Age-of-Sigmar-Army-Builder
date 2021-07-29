@@ -29,7 +29,7 @@ const AddUnitModal = (props) => {
       stats: {
         save: e.target.save.value,
         move: e.target.move.value,
-        wounds: e.target.move.value,
+        wounds: e.target.wounds.value,
         bravery: e.target.bravery.value,
       },
       attacks: [],

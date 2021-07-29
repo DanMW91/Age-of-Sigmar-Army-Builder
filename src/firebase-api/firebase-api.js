@@ -517,3 +517,54 @@ export const addUserToGroup = async (
     console.error(err);
   }
 };
+
+export const sendNotification = async (token, notificationObj) => {
+  const targetUser = notificationObj.targetUserName;
+  const notificationId = notificationObj.notificationId;
+  const notificationType = notificationObj.type;
+
+  try {
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers/${targetUser}/.json?auth=${token}`
+    );
+    console.log(response);
+    const result = await response.json();
+
+    if (!response.ok) {
+      console.log(response);
+      throw new Error(response.error);
+    }
+    const targetUserId = Object.values(result)[0].userId;
+    console.log(targetUserId);
+
+    const secondResponse = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/notifications/${targetUserId}/${notificationId}/${notificationType}/.json?auth=${token}`,
+      { method: "POST", body: JSON.stringify(notificationObj) }
+    );
+    console.log(secondResponse);
+    const secondResult = await secondResponse.json();
+
+    if (!secondResponse.ok) {
+      throw new Error(secondResponse.error);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const fetchNotifications = async (token, userId) => {
+  try {
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/notifications/${userId}/.json?auth=${token}`
+    );
+
+    const notificationsResponse = await response.json();
+
+    if (!response.ok) {
+      throw new Error(response.error);
+    }
+    return notificationsResponse;
+  } catch (err) {
+    console.error(err);
+  }
+};

@@ -59,6 +59,8 @@ const ActiveBattalion = (props) => {
           </ul>
         </div>
         <div
+          onMouseEnter={() => setShowDetails(true)}
+          onMouseLeave={() => setShowDetails(false)}
           onClick={() => setUsedAbility((prevState) => !prevState)}
           className={
             usedAbility
@@ -70,17 +72,15 @@ const ActiveBattalion = (props) => {
             <div className={showDetails ? classes.details : classes.hidden}>
               {bonusTextRef.current}
             </div>
+
             {bonusesRef.current.map((bonus) => (
-              <span
-                onMouseEnter={() => setShowDetails(true)}
-                onMouseLeave={() => setShowDetails(false)}
-              >
-                {bonus}
-              </span>
+              <span>{bonus}</span>
             ))}
           </h3>
-          <button onClick={deleteBattalionHandler}>Delete</button>
         </div>
+        <button className={classes.delete} onClick={deleteBattalionHandler}>
+          Delete
+        </button>
       </Card>
     </>
   );

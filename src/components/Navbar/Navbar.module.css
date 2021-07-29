@@ -41,3 +41,11 @@
 .navbar .active {
   background: #cfcfb8;
 }
+
+.notification {
+  width: 30px;
+  height: 30px;
+  font-size: 200%;
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+}

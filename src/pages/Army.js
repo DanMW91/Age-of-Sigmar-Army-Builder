@@ -58,11 +58,9 @@ const Army = () => {
             <h4>Select Army</h4>
           </div>
           {armyLoaded && (
-            <>
-              <div className={classes.button} onClick={openAddUnitModalHandler}>
-                <h4>Add Unit</h4>
-              </div>
-            </>
+            <div className={classes.button} onClick={openAddUnitModalHandler}>
+              <h4>Add Unit</h4>
+            </div>
           )}
         </div>
         {armyLoaded && <h2>{armyName}</h2>}

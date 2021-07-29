@@ -10,7 +10,6 @@ const Header = (props) => {
         <img src={sigmarLogo} alt="age of sigmar Logo" />
         <Tracker trackType={"VP"} />
       </div>
-      {/* <h2>Army Tracker</h2> */}
     </div>
   );
 };

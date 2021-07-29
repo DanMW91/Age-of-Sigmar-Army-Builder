@@ -13,7 +13,9 @@ const BattalionUnit = (props) => {
   const battalionObj = props.battalionObj;
 
   const disabledRef = useRef(false);
-  const unitSpentRef = useRef();
+  const unitSpentRef = useRef(null);
+
+  console.log(unitTypeRef.current);
 
   useLayoutEffect(() => {
     unitTypeRef.current =
@@ -41,9 +43,20 @@ const BattalionUnit = (props) => {
 
   useEffect(() => {
     setSelected(false);
+    unitSpentRef.current = null;
   }, [curBattalionName]);
 
   const toggleSelectHandler = (e, typeBypass = false) => {
+    if (
+      unitTypeRef.current === "leaders" &&
+      props.unitObj.stats.wounds > 9 &&
+      !unitSpentRef.current
+    ) {
+      alert(
+        "HQ units with a wounds value of 10 or greater cannot fulfil Leader slot of core battalions."
+      );
+      return;
+    }
     if (typeBypass) {
       disabledRef.current = false;
     }
@@ -87,6 +100,12 @@ const BattalionUnit = (props) => {
       battalionObj.commanders.optionalFilled ===
         battalionObj.commanders.optional
     ) {
+      return;
+    }
+    if (e.target.innerText === "Leader" && props.unitObj.stats.wounds > 9) {
+      alert(
+        "HQ units with a wounds value of 10 or greater cannot fulfil Leader slot of core battalions."
+      );
       return;
     }
     if (

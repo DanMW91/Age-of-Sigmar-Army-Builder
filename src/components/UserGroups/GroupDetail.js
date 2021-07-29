@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import NotificationsContext from "../../store/notifcations-context";
 import Members from "./Members";
 import BattleLogsContainer from "./BattleLogs/BattleLogsContainer";
 import classes from "./GroupDetail.module.css";
 
 const GroupDetail = () => {
   const [displayPage, setDisplayPage] = useState("MEMBERS");
+  const notificationsCtx = useContext(NotificationsContext);
+
+  const battleLogNotification = notificationsCtx.pendingLogNotifications
+    ? true
+    : false;
+  console.log(battleLogNotification);
 
   const setMembersViewHandler = () => {
     setDisplayPage("MEMBERS");
@@ -32,6 +39,9 @@ const GroupDetail = () => {
           onClick={setBattleLogsViewHandler}
         >
           Battle Logs
+          {battleLogNotification && (
+            <div className={classes.notification}>!</div>
+          )}
         </div>
       </nav>
       {displayPage === "BATTLE-LOGS" && <BattleLogsContainer />}
