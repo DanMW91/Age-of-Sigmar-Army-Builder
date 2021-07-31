@@ -568,3 +568,21 @@ export const fetchNotifications = async (token, userId) => {
     console.error(err);
   }
 };
+
+export const deleteLogNotification = async (userId, token, notificationId) => {
+  try {
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/notifications/${userId}/${notificationId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
+    console.log(response);
+    if (!response.ok) {
+      console.log(response);
+      throw new Error(response.error);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};

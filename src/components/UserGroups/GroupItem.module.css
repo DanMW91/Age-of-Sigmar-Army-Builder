@@ -1,6 +1,8 @@
 .groupItem {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 92%;
   height: 10%;
   border-radius: 0;
@@ -12,4 +14,13 @@
 .groupItem:hover {
   cursor: pointer;
   transform: scale(1.03);
+}
+.groupItem h3 {
+  margin: 0px;
+}
+
+.notification {
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }

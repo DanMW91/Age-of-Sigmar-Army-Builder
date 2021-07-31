@@ -18,6 +18,7 @@
 }
 
 .detailNavItem {
+  position: relative;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   color: rgb(202, 217, 228);
@@ -35,4 +36,10 @@
 .active {
   background: #cfcfb8;
   color: rgb(36, 36, 36);
+}
+
+.notification {
+  position: absolute;
+  right: 15px;
+  top: 5px;
 }

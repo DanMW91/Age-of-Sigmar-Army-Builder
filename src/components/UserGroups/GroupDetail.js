@@ -1,17 +1,22 @@
-import { useState, useContext } from "react";
-import NotificationsContext from "../../store/notifcations-context";
+import { useState, useContext, useLayoutEffect } from "react";
+import NotificationsContext from "../../store/notifications-context";
+import GroupsContext from "../../store/groups-context";
 import Members from "./Members";
 import BattleLogsContainer from "./BattleLogs/BattleLogsContainer";
+import Notification from "../UI/Notification";
 import classes from "./GroupDetail.module.css";
 
 const GroupDetail = () => {
   const [displayPage, setDisplayPage] = useState("MEMBERS");
-  const notificationsCtx = useContext(NotificationsContext);
 
-  const battleLogNotification = notificationsCtx.pendingLogNotifications
-    ? true
-    : false;
-  console.log(battleLogNotification);
+  const notificationsCtx = useContext(NotificationsContext);
+  const groupsCtx = useContext(GroupsContext);
+
+  console.log(notificationsCtx.currentGroupHasNotifications);
+
+  useLayoutEffect(() => {
+    setDisplayPage("MEMBERS");
+  }, [groupsCtx.activeGroup]);
 
   const setMembersViewHandler = () => {
     setDisplayPage("MEMBERS");
@@ -39,12 +44,16 @@ const GroupDetail = () => {
           onClick={setBattleLogsViewHandler}
         >
           Battle Logs
-          {battleLogNotification && (
-            <div className={classes.notification}>!</div>
+          {notificationsCtx.currentGroupHasNotifications && (
+            <Notification className={classes.notification} />
           )}
         </div>
       </nav>
-      {displayPage === "BATTLE-LOGS" && <BattleLogsContainer />}
+      {displayPage === "BATTLE-LOGS" && (
+        <BattleLogsContainer
+          hasNotifications={notificationsCtx.currentGroupHasNotifications}
+        />
+      )}
       {displayPage === "MEMBERS" && <Members />}
     </section>
   );

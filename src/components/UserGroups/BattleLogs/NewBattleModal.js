@@ -70,6 +70,7 @@ const NewBattleModal = (props) => {
     };
 
     await sendNotification(token, notificationObj);
+    props.onCloseModal();
   };
 
   return (

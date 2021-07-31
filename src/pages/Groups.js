@@ -1,12 +1,7 @@
-import { GroupsContextProvider } from "../store/groups-context";
 import UserGroupsMain from "../components/UserGroups/UserGroupsMain";
 
 const Groups = () => {
-  return (
-    <GroupsContextProvider>
-      <UserGroupsMain />
-    </GroupsContextProvider>
-  );
+  return <UserGroupsMain />;
 };
 
 export default Groups;

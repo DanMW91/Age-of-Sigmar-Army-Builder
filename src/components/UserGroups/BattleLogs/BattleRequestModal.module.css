@@ -1,0 +1,22 @@
+.battleRequestmodal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 90%;
+}
+
+.armyForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 70%;
+}
+
+.armyInput {
+  width: 50%;
+  height: 50%;
+}
