@@ -1,6 +1,5 @@
 const LogNotificationItem = (props) => {
   const selectLogNotifHandler = () => {
-    console.log(props);
     props.onOpenLogNotifModal(props.battleLogObj);
   };
   return (

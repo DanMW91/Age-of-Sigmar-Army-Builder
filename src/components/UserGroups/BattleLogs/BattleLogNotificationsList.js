@@ -50,6 +50,7 @@ const BattleLogNotificationsList = () => {
 
             return (
               <LogNotificationItem
+                key={Math.random()}
                 sentBy={log.battleLog.yourName}
                 battleLogObj={log}
                 onOpenLogNotifModal={openLogNotifModalHandler}

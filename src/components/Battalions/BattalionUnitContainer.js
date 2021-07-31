@@ -7,10 +7,11 @@ import AuthContext from "../../store/auth-context";
 const BattalionUnitContainer = (props) => {
   const authCtx = useContext(AuthContext);
   const userArmy = authCtx.userArmy.units;
-  console.log(props);
+
   const onToggleUnitHandler = (unitObj, type, action) => {
     props.onToggleUnit(unitObj, type, action);
   };
+  console.log();
 
   return (
     <Card className={classes.unitContainer}>
@@ -28,6 +29,7 @@ const BattalionUnitContainer = (props) => {
         .filter((unit) => !unit.inBattalion) //filter out units that are in battalions already
         .map((unit) => (
           <BattalionUnit
+            key={unit.id}
             battalionObj={props.battalionObj}
             battalionName={props.battalionName}
             onToggleUnit={onToggleUnitHandler}
@@ -46,6 +48,7 @@ const BattalionUnitContainer = (props) => {
           .filter((unit) => !unit.inBattalion) //filter out units that are in battalions already
           .map((unit) => (
             <BattalionUnit
+              key={unit.id}
               battalionObj={props.battalionObj}
               battalionName={props.battalionName}
               onToggleUnit={onToggleUnitHandler}

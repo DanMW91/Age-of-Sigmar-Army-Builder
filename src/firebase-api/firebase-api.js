@@ -527,21 +527,19 @@ export const sendNotification = async (token, notificationObj) => {
     const response = await fetch(
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers/${targetUser}/.json?auth=${token}`
     );
-    console.log(response);
+
     const result = await response.json();
 
     if (!response.ok) {
-      console.log(response);
       throw new Error(response.error);
     }
     const targetUserId = Object.values(result)[0].userId;
-    console.log(targetUserId);
 
     const secondResponse = await fetch(
       `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/notifications/${targetUserId}/${notificationId}/${notificationType}/.json?auth=${token}`,
       { method: "POST", body: JSON.stringify(notificationObj) }
     );
-    console.log(secondResponse);
+
     const secondResult = await secondResponse.json();
 
     if (!secondResponse.ok) {
@@ -577,9 +575,39 @@ export const deleteLogNotification = async (userId, token, notificationId) => {
         method: "DELETE",
       }
     );
-    console.log(response);
+
     if (!response.ok) {
-      console.log(response);
+      throw new Error(response.error);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const retrieveLogs = async (groupId, token) => {
+  try {
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}/newGroupsObj/logs/.json?auth=${token}`
+    );
+    console.log(response);
+    const logs = await response.json();
+    if (!response.ok) {
+      throw new Error(response.error);
+    }
+    console.log(logs);
+    return logs;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const storeLog = async (token, groupId, log) => {
+  try {
+    const response = await fetch(
+      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}/newGroupsObj/logs/.json?auth=${token}`,
+      { method: "POST", body: JSON.stringify(log) }
+    );
+    if (!response.ok) {
       throw new Error(response.error);
     }
   } catch (err) {

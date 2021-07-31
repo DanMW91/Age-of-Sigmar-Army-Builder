@@ -43,7 +43,11 @@ const Members = () => {
         </form>
       )}
       {membersList.map((member) => (
-        <MemberItem userName={member.userName} admin={member.admin} />
+        <MemberItem
+          userName={member.userName}
+          admin={member.admin}
+          key={Math.random()}
+        />
       ))}
     </div>
   );

@@ -34,6 +34,7 @@ export const GroupsContextProvider = (props) => {
 
   const setGroup = (group) => {
     setActiveGroup(group);
+    console.log(group);
   };
 
   const setReqs = useCallback((groupRequests) => {

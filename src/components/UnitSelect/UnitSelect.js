@@ -14,7 +14,7 @@ const UnitSelect = (props) => {
 
     (async () => {
       const units = await retrieveUnits(userId, token);
-      console.log(units);
+
       if (mounted) setDisplayUnits(units);
     })();
 
@@ -22,7 +22,7 @@ const UnitSelect = (props) => {
       mounted = false;
     };
   }, [authCtx]);
-  console.log(displayUnits);
+
   return (
     <>
       {displayUnits && (

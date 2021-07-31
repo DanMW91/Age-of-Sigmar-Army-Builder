@@ -12,8 +12,6 @@ const GroupDetail = () => {
   const notificationsCtx = useContext(NotificationsContext);
   const groupsCtx = useContext(GroupsContext);
 
-  console.log(notificationsCtx.currentGroupHasNotifications);
-
   useLayoutEffect(() => {
     setDisplayPage("MEMBERS");
   }, [groupsCtx.activeGroup]);

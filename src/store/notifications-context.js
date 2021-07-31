@@ -1,8 +1,6 @@
 import React, {
   useState,
-  useRef,
   useCallback,
-  useEffect,
   useContext,
   useLayoutEffect,
 } from "react";
@@ -18,7 +16,7 @@ const NotificationsContext = React.createContext({
   isNotifications: null,
   groupsWithNotifications: null,
   currentGroupHasNotifications: null,
-  deleteNotification: null,
+  deleteNotification: () => {},
 });
 
 export const NotificationsContextProvider = (props) => {
@@ -38,9 +36,8 @@ export const NotificationsContextProvider = (props) => {
     const userId = authCtx.userId;
     const token = authCtx.token;
     const notifications = await fetchNotifications(token, userId);
-    console.log(notifications);
+
     if (!notifications) {
-      console.log("setting to null");
       setCurrentGroupHasNotifications(false);
       setPendingLogNotifications(null);
       setGroupsWithNotifications(null);
@@ -58,10 +55,9 @@ export const NotificationsContextProvider = (props) => {
     );
 
     const uniqueGroupsWithNotifs = [...new Set(allGroupsWithNotifs)];
-    console.log(" updated notifs");
+
     setPendingLogNotifications(pendingLogs);
     setGroupsWithNotifications(uniqueGroupsWithNotifs);
-    console.log(uniqueGroupsWithNotifs);
   }, [authCtx.token, authCtx.userId]);
 
   useLayoutEffect(() => {
@@ -72,35 +68,23 @@ export const NotificationsContextProvider = (props) => {
 
   useLayoutEffect(() => {
     if (!groupsCtx.activeGroup) return;
+
     const currentGroupId = Object.values(groupsCtx.activeGroup)[0].groupId;
-    console.log(groupsWithNotifications);
+
     if (
       groupsWithNotifications &&
       groupsWithNotifications.includes(currentGroupId)
     ) {
       setCurrentGroupHasNotifications(true);
-      console.log("should NOT be here");
     } else {
-      console.log("should be here");
       setCurrentGroupHasNotifications(false);
     }
   }, [groupsCtx.activeGroup, groupsWithNotifications]);
 
-  // useLayoutEffect(() => {
-  //   if (!deleteNotification) return;
-  //   console.log("in delete layout effect");
-  //   const userId = authCtx.userId;
-  //   const token = authCtx.token;
-  //   (async () => {
-  //     await deleteLogNotification(userId, token, deleteNotification);
-  //     console.log("finished deleting");
-  //   })();
-  // }, [deleteNotification, authCtx.userId, authCtx.token]);
-
   const deleteNotificationHandler = async (notificationId) => {
     const userId = authCtx.userId;
     const token = authCtx.token;
-    console.log("in delete handler");
+
     await deleteLogNotification(userId, token, notificationId);
     await setNotifications();
   };

@@ -43,7 +43,7 @@ const ArmiesModal = (props) => {
 
     (async () => {
       const armies = await retrieveArmies(userId, token);
-      console.log(armies);
+
       if (mounted) setArmiesList(armies);
     })();
 
