@@ -13,7 +13,7 @@ function App() {
   const isLoading = authCtx.isLoading;
 
   return (
-    <Switch>
+    <Switch basename={process.env.PUBLIC_URL}>
       <Route path="/" exact>
         {!isLoggedIn && <Redirect to="/login" />}
         {isLoggedIn && <Redirect to="/army" />}

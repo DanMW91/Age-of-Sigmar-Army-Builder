@@ -76,7 +76,7 @@ const LoginForm = () => {
   };
 
   return (
-    <section style={{ height: `100vw` }}>
+    <section>
       {!authCtx.isLoading && (
         <Card className={classes.loginForm}>
           {loggingIn && (

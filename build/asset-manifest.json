@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6928545a.chunk.css",
+    "main.js": "/static/js/main.ed3a1cf3.chunk.js",
+    "main.js.map": "/static/js/main.ed3a1cf3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.039636ad.js",
+    "runtime-main.js.map": "/static/js/runtime-main.039636ad.js.map",
+    "static/js/2.ecda96a3.chunk.js": "/static/js/2.ecda96a3.chunk.js",
+    "static/js/2.ecda96a3.chunk.js.map": "/static/js/2.ecda96a3.chunk.js.map",
+    "static/js/3.c67d12bb.chunk.js": "/static/js/3.c67d12bb.chunk.js",
+    "static/js/3.c67d12bb.chunk.js.map": "/static/js/3.c67d12bb.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.6928545a.chunk.css.map": "/static/css/main.6928545a.chunk.css.map",
+    "static/js/2.ecda96a3.chunk.js.LICENSE.txt": "/static/js/2.ecda96a3.chunk.js.LICENSE.txt",
+    "static/media/sigmar-square.074bb5d3.png": "/static/media/sigmar-square.074bb5d3.png",
+    "static/media/sigmarLogo.8fe6a663.png": "/static/media/sigmarLogo.8fe6a663.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.039636ad.js",
+    "static/js/2.ecda96a3.chunk.js",
+    "static/css/main.6928545a.chunk.css",
+    "static/js/main.ed3a1cf3.chunk.js"
+  ]
+}

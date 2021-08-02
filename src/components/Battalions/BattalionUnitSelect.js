@@ -228,8 +228,10 @@ const BattalionUnitSelect = React.forwardRef((props, ref) => {
       )}
 
       {showAddBattalion && (
+        <div className={classes.buttonBar}>
         <div onClick={addBattalionHandler} className={classes.button}>
           <h3>Add Battalion</h3>
+        </div>
         </div>
       )}
     </Card>

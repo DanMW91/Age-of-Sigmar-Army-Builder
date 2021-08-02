@@ -2,7 +2,7 @@ import { useContext, useLayoutEffect, useState } from "react";
 import { retrieveUnits } from "../../firebase-api/firebase-api";
 import AuthContext from "../../store/auth-context";
 import UnitSelectContainer from "./UnitSelectContainer";
-
+import classes from "./UnitSelect.module.css";
 const UnitSelect = (props) => {
   const [displayUnits, setDisplayUnits] = useState();
   const authCtx = useContext(AuthContext);
@@ -26,7 +26,7 @@ const UnitSelect = (props) => {
   return (
     <>
       {displayUnits && (
-        <div>
+        <div className={classes.unitSelectList}>
           {displayUnits.leaders[1] && (
             <UnitSelectContainer
               containerType={"Leaders"}

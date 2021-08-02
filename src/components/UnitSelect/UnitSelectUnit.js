@@ -27,9 +27,13 @@ const UnitSelectUnit = (props) => {
   };
   return (
     <Card className={classes.unit} onClick={addUnitHandler}>
-      <div className={classes.unitname}>
+      <div className={classes.unitName}>
         <h3>{props.name}</h3>
-        <div onClick={deleteHandler}>delete</div>
+        <div className={classes.deleteHolder}>
+          <div className={classes.delete} onClick={deleteHandler}>
+            delete
+          </div>
+        </div>
       </div>
     </Card>
   );

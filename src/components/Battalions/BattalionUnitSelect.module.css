@@ -4,7 +4,7 @@
   padding-bottom: 7px;
   width: 88%;
   margin: auto;
-  margin-bottom: 3vw;
+  margin-bottom: 10%;
   margin-top: 2%;
 }
 .containerheader {
@@ -32,6 +32,12 @@
   font-weight: bold;
 }
 
+.buttonBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .button {
   display: flex;
   justify-content: center;
@@ -39,7 +45,7 @@
   border: 2px solid rgb(15, 63, 85);
   width: 8vw;
   height: 3vw;
-  background: rgb(61, 181, 236);
+  background: #3b87a6;
   border-radius: 15px;
   box-shadow: 4px 4px rgb(35, 96, 124);
   margin-bottom: 10px;

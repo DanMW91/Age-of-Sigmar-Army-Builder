@@ -23,6 +23,7 @@
   border: 2px solid #015178;
   /* border-radius: 12px; */
   background: #3b87a6;
+  box-shadow: 0 0 5px rgb(97, 97, 97);
 }
 .logTitle {
   display: flex;
@@ -32,4 +33,5 @@
   color: rgb(202, 217, 228);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  box-shadow: 0 0 5px rgb(97, 97, 97);
 }

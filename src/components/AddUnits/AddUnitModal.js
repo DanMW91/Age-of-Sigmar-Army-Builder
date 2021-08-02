@@ -101,7 +101,7 @@ const AddUnitModal = (props) => {
           <input id="wounds" type="number" required />
           <label htmlFor="save">Save:</label>
           <input id="save" type="number" required />
-          <label htmlFor="move">Bravery</label>
+          <label htmlFor="move">Bravery:</label>
           <input id="bravery" type="number" required />
           <button type="submit">Submit</button>
         </form>

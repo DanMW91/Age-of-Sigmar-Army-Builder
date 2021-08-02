@@ -18,12 +18,25 @@
   color: rgb(0, 0, 0);
   padding: 2px;
 }
-.unitname {
+.unitName {
   text-align: center;
-  width: 10vw;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border-right: 5px solid rgb(30, 78, 110);
+}
+.deleteHolder {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 50%;
+}
+.delete {
+  background: rgb(236, 75, 75);
+  border: 1px solid rgb(199, 31, 31);
+  padding: 2%;
+  border-radius: 10px;
+}
+.delete:hover {
+  background: rgb(236, 126, 126);
 }
