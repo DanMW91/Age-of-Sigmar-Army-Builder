@@ -11,6 +11,7 @@ const NewBattleModal = (props) => {
   const [opponent, setOpponent] = useState();
   const authCtx = useContext(AuthContext);
   const groupsCtx = useContext(GroupsContext);
+  const battleNameRef = useRef();
   const battleplanRef = useRef();
   const pointsRef = useRef();
   const yourScoreRef = useRef();
@@ -24,13 +25,14 @@ const NewBattleModal = (props) => {
   const currentUser = authCtx.userName;
 
   const opponentRef = useRef();
-  const users = Object.values(groupsCtx.activeGroup)[0]
-    .members.filter((user) => user.userName !== currentUser)
+  const users = Object.values(Object.values(groupsCtx.activeGroup)[0].members)
+    .filter((user) => user.userName !== currentUser)
     .map((user) => user.userName);
 
   const submitDetailsHandler = (e) => {
     e.preventDefault();
     if (
+      battleNameRef &&
       battleplanRef &&
       pointsRef &&
       yourScoreRef &&
@@ -39,6 +41,7 @@ const NewBattleModal = (props) => {
       dateRef
     ) {
       logObjectRef.current = {
+        battleName: battleNameRef.current.value,
         yourName: currentUser,
         opponentName: opponentRef.current.value,
         battleplan: battleplanRef.current.value,
@@ -59,6 +62,7 @@ const NewBattleModal = (props) => {
     const token = authCtx.token;
     logObjectRef.current.armyList1 = armyListRef.current.value;
     console.log(logObjectRef.current);
+    console.log(Object.values(groupsCtx.activeGroup)[0]);
     const groupId = Object.values(groupsCtx.activeGroup)[0].groupId;
 
     const notificationObj = {
@@ -99,6 +103,8 @@ const NewBattleModal = (props) => {
           </select>
           {opponent && (
             <>
+              <label htmlFor="battleName">Battle Name:</label>
+              <input type="text" id="battleName" ref={battleNameRef} required />
               <label htmlFor="battleplan">Battleplan:</label>
               <input type="text" id="battleplan" ref={battleplanRef} required />
               <label htmlFor="points">Points:</label>

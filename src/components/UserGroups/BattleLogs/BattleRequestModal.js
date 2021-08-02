@@ -11,7 +11,9 @@ const BattleRequestModal = (props) => {
   const authCtx = useContext(AuthContext);
   const notificationsCtx = useContext(NotificationsContext);
   const armyListRef = useRef();
+
   const senderName = props.battleLogObj.battleLog.yourName;
+  const battleName = props.battleLogObj.battleLog.battleName;
   const winner = props.battleLogObj.battleLog.winner;
   const date = props.battleLogObj.battleLog.date;
   const points = props.battleLogObj.battleLog.points;
@@ -31,6 +33,7 @@ const BattleRequestModal = (props) => {
 
     await storeLog(token, currentGroupId, logObj);
     await notificationsCtx.deleteNotification(notificationId);
+    await props.refreshLogs();
     props.onCloseModal();
   };
 
@@ -47,6 +50,7 @@ const BattleRequestModal = (props) => {
       <div>
         {senderName} wants to log a battle you had on {date}
       </div>
+      <div className={classes.battleName}>{battleName}</div>
       <div>Winner: {winner}</div>
       <div>Points: {points} </div>
       <form className={classes.armyForm} onSubmit={submitListHandler}>

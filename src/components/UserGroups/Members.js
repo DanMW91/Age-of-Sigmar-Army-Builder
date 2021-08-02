@@ -8,18 +8,23 @@ import classes from "./Members.module.css";
 const Members = () => {
   const authCtx = useContext(AuthContext);
   const groupsCtx = useContext(GroupsContext);
-  const membersList = Object.values(groupsCtx.activeGroup)[0].members;
+  const membersList = Object.values(
+    Object.values(groupsCtx.activeGroup)[0].members
+  );
+  console.log(membersList);
 
   const sendReqUserNameRef = useRef();
 
   const sendGroupRequestHandler = (e) => {
     e.preventDefault();
 
-    const groupName = Object.values(groupsCtx.activeGroup)[0].groupName;
+    const groupName = Object.values(Object.values(groupsCtx.activeGroup))[0]
+      .groupName;
 
-    const groupUsers = Object.values(groupsCtx.activeGroup)[0].members.map(
-      (user) => user.userName
-    );
+    const groupUsers = Object.values(
+      Object.values(Object.values(groupsCtx.activeGroup))[0].members
+    ).map((user) => user.userName);
+
     if (groupUsers.includes(sendReqUserNameRef.current.value)) return;
 
     const token = authCtx.token;

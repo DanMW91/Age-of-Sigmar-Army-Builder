@@ -115,6 +115,7 @@ const BattalionsMain = () => {
       <Card className={classes.battalionsContainer}>
         <div className={classes.containerheader}>
           <h2>Battalions</h2>
+          <div>Mouse-Over Battalion Bonuses for Details</div>
         </div>
         <div className={classes.squareContainer}>
           <div className={classes.squareRow}>

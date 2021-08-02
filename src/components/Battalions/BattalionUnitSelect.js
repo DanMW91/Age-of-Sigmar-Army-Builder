@@ -145,6 +145,7 @@ const BattalionUnitSelect = React.forwardRef((props, ref) => {
 
   const toggleUnitHandler = (unitObj, unit, action) => {
     if (action === "ADD") {
+      console.log(unitObj);
       tempBattalionUnits.current.push(unitObj);
       dispatchBattalionState({
         type: "ADD-UNIT",

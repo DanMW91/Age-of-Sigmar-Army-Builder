@@ -45,7 +45,7 @@ const GroupList = (props) => {
   return (
     <div className={classes.groupSection}>
       <form onSubmit={createGroupHandler}>
-        <label htmlFor="groupName">Group Name:</label>
+        <label htmlFor="groupName">New Group:</label>
         <input id="groupName" type="text" ref={groupNameRef} required />
         <button type="submit">+ Create Group</button>
       </form>
@@ -64,7 +64,7 @@ const GroupList = (props) => {
           })}
       </div>
       {!isLoading && <GroupReq toggleLoading={props.toggleLoading} />}
-      {isLoading && <LoadingSpinner />}
+      {isLoading && <LoadingSpinner className={classes.loadingSpinner} />}
     </div>
   );
 };

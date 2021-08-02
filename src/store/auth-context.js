@@ -86,7 +86,6 @@ export const AuthContextProvider = (props) => {
   };
 
   const loginHandler = (token, userId, name) => {
-   
     setUserId(userId);
     setToken(token);
 
@@ -168,6 +167,7 @@ export const AuthContextProvider = (props) => {
     const artillery = battalionUnitsArr.filter(
       (unit) => unit.unitType === "artillery"
     );
+    const other = battalionUnitsArr.filter((unit) => unit.unitType === "other");
 
     if (leaders[0]) {
       addToBattalionHelperFn(leaders, "leaders", battalionObj);
@@ -180,6 +180,9 @@ export const AuthContextProvider = (props) => {
     }
     if (artillery[0]) {
       addToBattalionHelperFn(artillery, "artillery", battalionObj);
+    }
+    if (other[0]) {
+      addToBattalionHelperFn(other, "other", battalionObj);
     }
 
     dispatchUserArmy({

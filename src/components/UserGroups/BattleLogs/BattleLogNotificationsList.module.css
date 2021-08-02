@@ -1,4 +1,33 @@
 .notificationsContainer {
-  background: tomato;
-  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  height: 20%;
+
+  background: #3b87a6;
+  border: 2px solid #015178;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  margin-top: 2%;
+}
+.requestTitle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: #015178;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.notificationsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow: scroll;
+  padding: 0px;
+}
+.requestTitle h3 {
+  color: rgb(202, 217, 228);
+  margin: 0px;
 }

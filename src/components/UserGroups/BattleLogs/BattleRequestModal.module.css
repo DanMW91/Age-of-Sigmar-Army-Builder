@@ -7,6 +7,10 @@
   height: 90%;
 }
 
+.battleRequestmodal div {
+  margin-bottom: 1%;
+}
+
 .armyForm {
   display: flex;
   flex-direction: column;
@@ -19,4 +23,8 @@
 .armyInput {
   width: 50%;
   height: 50%;
+}
+.battleName {
+  font-size: large;
+  font-weight: bolder;
 }

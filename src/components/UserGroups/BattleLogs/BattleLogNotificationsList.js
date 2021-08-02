@@ -5,7 +5,7 @@ import LogNotificationItem from "./LogNotificationItem";
 import BattleRequestModal from "./BattleRequestModal";
 import classes from "./BattleLogNotificationsList.module.css";
 
-const BattleLogNotificationsList = () => {
+const BattleLogNotificationsList = (props) => {
   const [battleLogNotifications, setBattleLogNotifications] = useState();
   const [showRequestLogModal, setShowRequestLogModal] = useState(false);
   const modalNotificationObjRef = useRef();
@@ -17,14 +17,11 @@ const BattleLogNotificationsList = () => {
       notificationsCtx.pendingLogNotifications.filter(
         (logNotif) =>
           Object.values(logNotif.pendingLog)[0].groupId ===
-          groupsCtx.activeGroup.newGroupsObj.groupId
+          Object.values(groupsCtx.activeGroup)[0].groupId
       );
 
     setBattleLogNotifications(currGroupNotifications);
-  }, [
-    notificationsCtx.pendingLogNotifications,
-    groupsCtx.activeGroup.newGroupsObj.groupId,
-  ]);
+  }, [notificationsCtx.pendingLogNotifications, groupsCtx.activeGroup]);
 
   const openLogNotifModalHandler = (notificationObj) => {
     modalNotificationObjRef.current = notificationObj;
@@ -41,22 +38,29 @@ const BattleLogNotificationsList = () => {
         <BattleRequestModal
           onCloseModal={onCloseModalHandler}
           battleLogObj={modalNotificationObjRef.current}
+          refreshLogs={props.refreshLogs}
         />
       )}
-      <div className={classes.notificationsContainer}>
-        {battleLogNotifications &&
-          battleLogNotifications.map((notif) => {
-            const log = Object.values(notif.pendingLog)[0];
 
-            return (
-              <LogNotificationItem
-                key={Math.random()}
-                sentBy={log.battleLog.yourName}
-                battleLogObj={log}
-                onOpenLogNotifModal={openLogNotifModalHandler}
-              />
-            );
-          })}
+      <div className={classes.notificationsContainer}>
+        <div className={classes.requestTitle}>
+          <h3>Requests:</h3>
+        </div>
+        <div className={classes.notificationsList}>
+          {battleLogNotifications &&
+            battleLogNotifications.map((notif) => {
+              const log = Object.values(notif.pendingLog)[0];
+
+              return (
+                <LogNotificationItem
+                  key={Math.random()}
+                  sentBy={log.battleLog.yourName}
+                  battleLogObj={log}
+                  onOpenLogNotifModal={openLogNotifModalHandler}
+                />
+              );
+            })}
+        </div>
       </div>
     </>
   );

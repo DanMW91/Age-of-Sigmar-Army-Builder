@@ -20,7 +20,13 @@ const ActiveBattalion = (props) => {
   const bonusTextRef = useRef(currBattalionRef.current[0].textArray);
 
   useEffect(() => {
-    const unitTypeArray = ["leaders", "battleline", "monsters", "artillery"];
+    const unitTypeArray = [
+      "leaders",
+      "battleline",
+      "monsters",
+      "artillery",
+      "other",
+    ];
     let unitsArray = [];
     unitTypeArray.forEach((unitType) =>
       allUnits[`${unitType}`].forEach((unit) => {
@@ -68,11 +74,10 @@ const ActiveBattalion = (props) => {
               : classes.battalionBonuses
           }
         >
+          <div className={showDetails ? classes.details : classes.hidden}>
+            {bonusTextRef.current}
+          </div>
           <h3>
-            <div className={showDetails ? classes.details : classes.hidden}>
-              {bonusTextRef.current}
-            </div>
-
             {bonusesRef.current.map((bonus) => (
               <span>{bonus}</span>
             ))}

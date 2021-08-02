@@ -1,7 +1,9 @@
+import { FIREBASE_CONSTANTS } from "../constants";
+
 export const storeArmy = async (userId, userArmy, token) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/armies/${userArmy.armyId}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/armies/${userArmy.armyId}.json?auth=${token}`,
       {
         method: "PUT",
         body: JSON.stringify(userArmy),
@@ -19,7 +21,7 @@ export const storeArmy = async (userId, userArmy, token) => {
 export const retrieveArmy = async (userId, token, armyId) => {
   try {
     const armyData = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/armies/${armyId}.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/armies/${armyId}.json?auth=${token}`
     );
     const userArmy = await armyData.json();
 
@@ -47,7 +49,7 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
 
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/armies/${armyId}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/armies/${armyId}.json?auth=${token}`,
       {
         method: "POST",
         body: JSON.stringify(newArmy),
@@ -61,7 +63,7 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
     }
 
     const res = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allArmies/${armyId}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/allArmies/${armyId}.json?auth=${token}`,
       {
         method: "POST",
         body: JSON.stringify({ newArmyName, armyId }),
@@ -80,7 +82,7 @@ export const createNewArmy = async (userId, token, newArmyName, armyId) => {
 export const storeUserName = async (userId, userName, token) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/userName.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/userName.json?auth=${token}`,
       {
         method: "PUT",
         body: JSON.stringify(userName),
@@ -91,7 +93,7 @@ export const storeUserName = async (userId, userName, token) => {
       throw new Error(result.error.message);
     }
     const res = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers/${userName}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/allUsers/${userName}.json?auth=${token}`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -110,9 +112,7 @@ export const storeUserName = async (userId, userName, token) => {
 
 const checkUserNameIsUnique = async (userName) => {
   try {
-    const userData = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers.json`
-    );
+    const userData = await fetch(`${FIREBASE_CONSTANTS.URL}/allUsers.json`);
     const userNames = await userData.json();
 
     if (!userNames) return;
@@ -132,7 +132,7 @@ const checkUserNameIsUnique = async (userName) => {
 const createAllUnitsFrame = async (userId, token) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits/.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/allUnits/.json?auth=${token}`,
       {
         method: "PUT",
         body: JSON.stringify({
@@ -163,7 +163,7 @@ export const registerUser = async (
     await checkUserNameIsUnique(enteredUserName);
 
     const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDw_R-kZ2yj56Xri9CWKlk2Yuj4Gq2wo4g",
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_CONSTANTS.API_KEY}`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -197,7 +197,7 @@ export const registerUser = async (
 export const loginUser = async (enteredEmail, enteredPassword) => {
   try {
     const response = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDw_R-kZ2yj56Xri9CWKlk2Yuj4Gq2wo4g",
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_CONSTANTS.API_KEY}`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -217,7 +217,7 @@ export const loginUser = async (enteredEmail, enteredPassword) => {
     const { localId: userId, idToken: token } = results;
 
     const userNameResponse = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/userName.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/userName.json?auth=${token}`
     );
 
     const userNameResult = await userNameResponse.json();
@@ -235,7 +235,7 @@ export const loginUser = async (enteredEmail, enteredPassword) => {
 export const retrieveArmies = async (userId, token) => {
   try {
     const armiesData = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allArmies.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/allArmies.json?auth=${token}`
     );
     const allArmies = await armiesData.json();
 
@@ -252,7 +252,7 @@ export const retrieveArmies = async (userId, token) => {
 export const deleteArmy = async (userId, token, armyId) => {
   try {
     const deleteArmyResponse = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allArmies/${armyId}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/allArmies/${armyId}.json?auth=${token}`,
       {
         method: "DELETE",
       }
@@ -271,7 +271,7 @@ export const deleteArmy = async (userId, token, armyId) => {
 export const retrieveUnits = async (userId, token) => {
   try {
     const unitsData = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/allUnits.json?auth=${token}`
     );
     const allUnits = await unitsData.json();
 
@@ -292,7 +292,7 @@ export const storeNewUnit = async (userId, token, unitObj, unitType) => {
 
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits/.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/allUnits/.json?auth=${token}`,
       {
         method: "PUT",
         body: JSON.stringify(units),
@@ -314,7 +314,7 @@ export const deleteUnit = async (userId, token, unitType, unitId) => {
     allUnits[unitType] = newArray;
 
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/allUnits/.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/allUnits/.json?auth=${token}`,
       {
         method: "PUT",
         body: JSON.stringify(allUnits),
@@ -338,7 +338,7 @@ export const createGroup = async (
 ) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/groups/.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/groups/.json?auth=${token}`,
       {
         method: "POST",
         body: JSON.stringify({ groupId, groupName }),
@@ -350,13 +350,13 @@ export const createGroup = async (
     }
 
     const res = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/groups/${groupId}.json?auth=${token}`,
       {
         method: "POST",
         body: JSON.stringify({
           groupName,
           groupId,
-          members: [{ userId, userName, admin: true }],
+          members: { [`${userId}`]: { userId, userName, admin: true } },
         }),
       }
     );
@@ -373,7 +373,7 @@ export const createGroup = async (
 export const fetchGroups = async (userId, token) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/groups.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/groups.json?auth=${token}`
     );
     const groupsData = await response.json();
 
@@ -390,7 +390,7 @@ export const fetchGroups = async (userId, token) => {
 export const fetchActiveGroup = async (token, groupId) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/groups/${groupId}.json?auth=${token}`
     );
     const groupData = await response.json();
 
@@ -406,22 +406,28 @@ export const fetchActiveGroup = async (token, groupId) => {
 
 export const sendGroupRequest = async (token, groupId, userName, groupName) => {
   try {
+    //check if user exists
+
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers/${userName}.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/allUsers/${userName}.json?auth=${token}`
     );
     const userIdObj = await response.json();
     if (!userIdObj) throw new Error("no such user!");
     const userId = Object.values(userIdObj)[0].userId;
 
+    //check if user had already been invited to this group
+
     const checkGrp = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}/${groupId}.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/groupReqs/${userId}/${groupId}.json?auth=${token}`
     );
     const reqExists = await checkGrp.json();
 
     if (reqExists) throw new Error("Already invited");
 
+    // const sendNotif = await fetch();
+
     const groupReq = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}/${groupId}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/groupReqs/${userId}/${groupId}.json?auth=${token}`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -439,7 +445,7 @@ export const sendGroupRequest = async (token, groupId, userName, groupName) => {
 export const fetchGroupReqs = async (userId, token) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/groupReqs/${userId}.json?auth=${token}`
     );
 
     const res = await response.json();
@@ -454,7 +460,7 @@ export const fetchGroupReqs = async (userId, token) => {
 export const deleteGroupRequest = async (userId, groupId, token) => {
   try {
     const deleteResponse = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groupReqs/${userId}/${groupId}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/groupReqs/${userId}/${groupId}.json?auth=${token}`,
       {
         method: "DELETE",
       }
@@ -476,11 +482,10 @@ export const addUserToGroup = async (
   groupName
 ) => {
   try {
-    // retrieving existing group data in order to modify
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/groups/.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/groups/${groupId}.json?auth=${token}`,
       {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify({ groupId, groupName }),
       }
     );
@@ -488,23 +493,25 @@ export const addUserToGroup = async (
     if (!response.ok) {
       throw new Error(result.error.message);
     }
+    // retrieving existing group data in order to modify
     const groupData = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/groups/${groupId}.json?auth=${token}`
     );
 
-    const fetchedGroups = await groupData.json();
+    const fetchedGroup = await groupData.json();
 
-    // Adding new user to the group members array and storing the new user group in firebase database
+    console.log(fetchedGroup);
+    let groupKey = "";
 
-    const newGroupsObj = Object.values(fetchedGroups)[0];
-
-    newGroupsObj.members.push({ userId, userName, admin: false });
+    for (const key in fetchedGroup) {
+      if (key !== "logs") groupKey = key;
+    }
 
     const res = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/groups/${groupId}/${groupKey}/members/${userId}.json?auth=${token}`,
       {
         method: "PUT",
-        body: JSON.stringify({ newGroupsObj }),
+        body: JSON.stringify({ userId, userName, admin: false }),
       }
     );
     const groupRes = await res.json();
@@ -518,6 +525,21 @@ export const addUserToGroup = async (
   }
 };
 
+export const makeAdmin = async (
+  token,
+  targetUser,
+  notificxationId,
+  groupId
+) => {
+  try {
+    const groupData = await fetch(
+      `${FIREBASE_CONSTANTS.URL}/groups/${groupId}.json?auth=${token}`
+    );
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const sendNotification = async (token, notificationObj) => {
   const targetUser = notificationObj.targetUserName;
   const notificationId = notificationObj.notificationId;
@@ -525,7 +547,7 @@ export const sendNotification = async (token, notificationObj) => {
 
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/allUsers/${targetUser}/.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/allUsers/${targetUser}/.json?auth=${token}`
     );
 
     const result = await response.json();
@@ -536,7 +558,7 @@ export const sendNotification = async (token, notificationObj) => {
     const targetUserId = Object.values(result)[0].userId;
 
     const secondResponse = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/notifications/${targetUserId}/${notificationId}/${notificationType}/.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/notifications/${targetUserId}/${notificationId}/${notificationType}/.json?auth=${token}`,
       { method: "POST", body: JSON.stringify(notificationObj) }
     );
 
@@ -553,7 +575,7 @@ export const sendNotification = async (token, notificationObj) => {
 export const fetchNotifications = async (token, userId) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/notifications/${userId}/.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/notifications/${userId}/.json?auth=${token}`
     );
 
     const notificationsResponse = await response.json();
@@ -567,10 +589,10 @@ export const fetchNotifications = async (token, userId) => {
   }
 };
 
-export const deleteLogNotification = async (userId, token, notificationId) => {
+export const deleteNotification = async (userId, token, notificationId) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/notifications/${userId}/${notificationId}.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/notifications/${userId}/${notificationId}.json?auth=${token}`,
       {
         method: "DELETE",
       }
@@ -587,10 +609,13 @@ export const deleteLogNotification = async (userId, token, notificationId) => {
 export const retrieveLogs = async (groupId, token) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}/newGroupsObj/logs/.json?auth=${token}`
+      `${FIREBASE_CONSTANTS.URL}/groups/${groupId}/logs/.json?auth=${token}`
     );
     console.log(response);
     const logs = await response.json();
+    for (const key in logs) {
+      logs[key].logKey = key;
+    }
     if (!response.ok) {
       throw new Error(response.error);
     }
@@ -604,7 +629,7 @@ export const retrieveLogs = async (groupId, token) => {
 export const storeLog = async (token, groupId, log) => {
   try {
     const response = await fetch(
-      `https://sigmar-ec5f7-default-rtdb.europe-west1.firebasedatabase.app/groups/${groupId}/newGroupsObj/logs/.json?auth=${token}`,
+      `${FIREBASE_CONSTANTS.URL}/groups/${groupId}/logs/.json?auth=${token}`,
       { method: "POST", body: JSON.stringify(log) }
     );
     if (!response.ok) {

@@ -5,7 +5,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import {
-  deleteLogNotification,
+  deleteNotification,
   fetchNotifications,
 } from "../firebase-api/firebase-api";
 import AuthContext from "./auth-context";
@@ -85,7 +85,7 @@ export const NotificationsContextProvider = (props) => {
     const userId = authCtx.userId;
     const token = authCtx.token;
 
-    await deleteLogNotification(userId, token, notificationId);
+    await deleteNotification(userId, token, notificationId);
     await setNotifications();
   };
 

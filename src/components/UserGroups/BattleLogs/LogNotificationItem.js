@@ -1,9 +1,14 @@
+import Card from "../../UI/Card";
+import classes from "./LogNotificationItem.module.css";
+
 const LogNotificationItem = (props) => {
   const selectLogNotifHandler = () => {
     props.onOpenLogNotifModal(props.battleLogObj);
   };
   return (
-    <div onClick={selectLogNotifHandler}>log request from {props.sentBy}</div>
+    <Card className={classes.notification} onClick={selectLogNotifHandler}>
+      Battlelog request from {props.sentBy}
+    </Card>
   );
 };
 
