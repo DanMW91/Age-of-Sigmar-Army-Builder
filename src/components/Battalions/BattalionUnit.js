@@ -6,6 +6,8 @@ const BattalionUnit = (props) => {
   const [selected, setSelected] = useState(false);
   const [displayLeaderSelection, setDisplayLeaderSelection] = useState(null);
 
+  console.log(props);
+
   const unitTypeRef = useRef();
 
   const curBattalionName = props.battalionName;
@@ -13,10 +15,13 @@ const BattalionUnit = (props) => {
   const battalionObj = props.battalionObj;
 
   const disabledRef = useRef(false);
-  const unitSpentRef = useRef();
+  const unitSpentRef = useRef(null);
 
   useLayoutEffect(() => {
-    unitTypeRef.current = props.type === "battleline" ? "troops" : props.type;
+    unitTypeRef.current =
+      props.type === "battleline" || props.type === "other"
+        ? "troops"
+        : props.type;
 
     if (
       (!battalionObj.leaders || !battalionObj.leaders.required === 0) &&
@@ -38,9 +43,20 @@ const BattalionUnit = (props) => {
 
   useEffect(() => {
     setSelected(false);
+    unitSpentRef.current = null;
   }, [curBattalionName]);
 
   const toggleSelectHandler = (e, typeBypass = false) => {
+    if (
+      unitTypeRef.current === "leaders" &&
+      props.unitObj.stats.wounds > 9 &&
+      !unitSpentRef.current
+    ) {
+      alert(
+        "HQ units with a wounds value of 10 or greater cannot fulfil Leader slot of core battalions."
+      );
+      return;
+    }
     if (typeBypass) {
       disabledRef.current = false;
     }
@@ -86,6 +102,12 @@ const BattalionUnit = (props) => {
     ) {
       return;
     }
+    if (e.target.innerText === "Leader" && props.unitObj.stats.wounds > 9) {
+      alert(
+        "HQ units with a wounds value of 10 or greater cannot fulfil Leader slot of core battalions."
+      );
+      return;
+    }
     if (
       e.target.innerText === "Leader" &&
       battalionObj.leaders.requiredFilled === battalionObj.leaders.required &&
@@ -120,8 +142,15 @@ const BattalionUnit = (props) => {
           displayLeaderSelection ? classes.leaderSelect : classes.hidden
         }
       >
-        <span onClick={chooseCommanderLeaderHandler}>Commander</span>
-        <span onClick={chooseCommanderLeaderHandler}>Leader</span>
+        <div
+          className={classes.commander}
+          onClick={chooseCommanderLeaderHandler}
+        >
+          Commander
+        </div>
+        <div className={classes.leader} onClick={chooseCommanderLeaderHandler}>
+          Leader
+        </div>
       </div>
 
       <h3>{props.unitObj.name}</h3>

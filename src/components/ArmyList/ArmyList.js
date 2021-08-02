@@ -1,25 +1,17 @@
 import { useContext } from "react";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 import ActiveBattalionsContainer from "../ActiveBattalions/ActiveBattalionsContainer";
 // import PhaseWindow from "./components/Phase/PhaseWindow";
 // import AllegienceContainer from "../Allegience/AllegienceContainer";
 import UnitContainer from "../UnitContainer/UnitContainer";
 
-
 const ArmyList = () => {
- 
-
   const authCtx = useContext(AuthContext);
   const units = authCtx.userArmy.units;
   const showBattalions = authCtx.userArmy?.activeBattalions[1] ? true : false;
 
- 
-
-  
-
   return (
     <>
-     
       {showBattalions && <ActiveBattalionsContainer />}
       {/* <AllegienceContainer containerType={"Allegience"} units={allegience} /> */}
 

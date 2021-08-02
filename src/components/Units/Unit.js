@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 import Card from "../UI/Card";
 import Modal from "../UI/Modal";
 import UnitStats from "./UnitStats";

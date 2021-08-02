@@ -14,6 +14,12 @@ export const battalions = [
       troops: { required: 1, optional: 1 },
     },
     bonuses: ["Magnificent", "Strategist"],
+    textArray: [
+      "Magnificent: When you pick enhancements for your army, you can pick one extra enhancement.",
+      <br />,
+      <br />,
+      "Strategist: Once per battle, when you receive commands points at the start of your hero phase, you can receive one extra command point.",
+    ],
   },
   {
     id: "b2",
@@ -26,6 +32,7 @@ export const battalions = [
       artillery: { required: 0, optional: 1 },
     },
     bonuses: ["Unified"],
+    textArray: ["Unified: One-drop deployment."],
   },
   {
     id: "b3",
@@ -35,6 +42,9 @@ export const battalions = [
       artillery: { required: 2, optional: 1 },
     },
     bonuses: ["Slayers"],
+    textArray: [
+      "Slayers: Once per battle, one unit from this battalion can receive the All-out Attack or Unleash Hell command without the command being issued and without a command point being spent.",
+    ],
   },
   {
     id: "b4",
@@ -44,6 +54,9 @@ export const battalions = [
       troops: { required: 1, optional: 2 },
     },
     bonuses: ["Swift"],
+    textArray: [
+      "Swift: Once per battle 1 unit from this battalion can receive the At the Double or Forward to Victory command without the command being issued and without a command point being spent",
+    ],
   },
   {
     id: "b5",
@@ -54,6 +67,9 @@ export const battalions = [
       monsters: { required: 2, optional: 1 },
     },
     bonuses: ["Expert"],
+    textArray: [
+      "Expert: Once per battle, one unit from this battalion can receive the All-out Attack or All-out Defence command without the command being issued and without a command point being spent. ",
+    ],
   },
   {
     id: "b6",
@@ -63,6 +79,12 @@ export const battalions = [
       leaders: { required: 2, optional: 1 },
     },
     bonuses: ["Strategist / Magnificent"],
+    textArray: [
+      "Magnificent: When you pick enhancements for your army, you can pick one extra enhancement.",
+      <br />,
+      <br />,
+      "Strategist: Once per battle, when you receive command points at the start of your hero phase, you can receive one extra command point.",
+    ],
   },
 ];
 
@@ -93,6 +115,7 @@ const BattalionsMain = () => {
       <Card className={classes.battalionsContainer}>
         <div className={classes.containerheader}>
           <h2>Battalions</h2>
+          <div>Mouse-Over Battalion Bonuses for Details</div>
         </div>
         <div className={classes.squareContainer}>
           <div className={classes.squareRow}>
@@ -103,6 +126,7 @@ const BattalionsMain = () => {
                 name={battalion.name}
                 units={battalion.units}
                 bonuses={battalion.bonuses}
+                textArray={battalion.textArray}
                 onSelectBattalion={selectBattalionHandler}
               />
             ))}

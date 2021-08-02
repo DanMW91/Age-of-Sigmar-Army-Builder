@@ -2,7 +2,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { useContext } from "react";
 import Auth from "./pages/Auth";
 import Army from "./pages/Army";
-import AuthContext from "./store/store";
+import Groups from "./pages/Groups";
+import AuthContext from "./store/auth-context";
 import Layout from "./components/UI/Layout";
 import Battalions from "./pages/Battalions";
 
@@ -29,6 +30,10 @@ function App() {
         </Route>
         <Route path="/battalions">
           {authCtx.isLoggedIn && !isLoading && <Battalions />}
+          {!authCtx.isLoggedIn && <Redirect to="/login" />}
+        </Route>
+        <Route path="/groups">
+          {authCtx.isLoggedIn && !isLoading && <Groups />}
           {!authCtx.isLoggedIn && <Redirect to="/login" />}
         </Route>
       </Layout>

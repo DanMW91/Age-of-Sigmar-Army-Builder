@@ -1,0 +1,30 @@
+.battleRequestmodal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 90%;
+}
+
+.battleRequestmodal div {
+  margin-bottom: 1%;
+}
+
+.armyForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 70%;
+}
+
+.armyInput {
+  width: 50%;
+  height: 50%;
+}
+.battleName {
+  font-size: large;
+  font-weight: bolder;
+}

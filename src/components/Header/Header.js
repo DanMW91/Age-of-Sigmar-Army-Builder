@@ -1,17 +1,8 @@
-import {useState} from 'react'
 import classes from "./Header.module.css";
 import sigmarLogo from "../../assets/sigmarLogo.png";
 import Tracker from "./Tracker";
 
 const Header = (props) => {
-
-const [displayingArmy, setDisplayingArmy] = useState(false)
-
-const displayingArmiesHandler = () => {
-  setDisplayingArmy(true)
-  props.onOpenArmiesModal()
-}
-
   return (
     <div className={classes.header}>
       <div className={classes.topbar}>
@@ -19,8 +10,6 @@ const displayingArmiesHandler = () => {
         <img src={sigmarLogo} alt="age of sigmar Logo" />
         <Tracker trackType={"VP"} />
       </div>
-      <h2>Army Tracker</h2>
-     
     </div>
   );
 };

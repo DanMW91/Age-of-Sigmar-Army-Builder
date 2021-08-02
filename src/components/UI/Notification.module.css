@@ -1,0 +1,13 @@
+.notification {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(255, 163, 163);
+  background: rgb(253, 75, 75);
+  font-size: small;
+  font-weight: bolder;
+  color: rgb(202, 217, 228);
+}

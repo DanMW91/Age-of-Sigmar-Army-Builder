@@ -2,7 +2,7 @@ import Card from "../UI/Card";
 import BattalionUnit from "./BattalionUnit";
 import classes from "./BattalionUnitContainer.module.css";
 import { useContext } from "react";
-import AuthContext from "../../store/store";
+import AuthContext from "../../store/auth-context";
 
 const BattalionUnitContainer = (props) => {
   const authCtx = useContext(AuthContext);
@@ -11,6 +11,7 @@ const BattalionUnitContainer = (props) => {
   const onToggleUnitHandler = (unitObj, type, action) => {
     props.onToggleUnit(unitObj, type, action);
   };
+  console.log();
 
   return (
     <Card className={classes.unitContainer}>
@@ -28,6 +29,7 @@ const BattalionUnitContainer = (props) => {
         .filter((unit) => !unit.inBattalion) //filter out units that are in battalions already
         .map((unit) => (
           <BattalionUnit
+            key={unit.id}
             battalionObj={props.battalionObj}
             battalionName={props.battalionName}
             onToggleUnit={onToggleUnitHandler}
@@ -39,6 +41,21 @@ const BattalionUnitContainer = (props) => {
             }
           />
         ))}
+      {props.otherPresent &&
+        authCtx.userArmy?.units.other[1] &&
+        userArmy.other
+          .slice(1)
+          .filter((unit) => !unit.inBattalion) //filter out units that are in battalions already
+          .map((unit) => (
+            <BattalionUnit
+              key={unit.id}
+              battalionObj={props.battalionObj}
+              battalionName={props.battalionName}
+              onToggleUnit={onToggleUnitHandler}
+              unitObj={unit}
+              type={"other"}
+            />
+          ))}
     </Card>
   );
 };

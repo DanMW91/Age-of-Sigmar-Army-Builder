@@ -3,8 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 3px solid rgb(30, 78, 110);
-  background: rgb(48, 127, 179);
+  opacity: 98%;
+  /* border: 3px solid rgb(30, 78, 110); */
+  background: #3b87a6;
   width: 50%;
   margin-top: 10vw;
   padding: 1rem;
@@ -30,7 +31,7 @@ section {
   align-items: center;
 }
 .authForm label {
-  color: rgb(31, 19, 19);
+  color: rgb(29, 29, 29);
 }
 .toggleForm {
   background: none !important;

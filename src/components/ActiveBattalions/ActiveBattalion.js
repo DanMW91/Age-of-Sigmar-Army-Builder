@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import AuthContext from "../..//store/store";
+import AuthContext from "../../store/auth-context";
 import classes from "./ActiveBattalion.module.css";
 import Card from "../UI/Card";
 import { battalions } from "../Battalions/BattalionsMain";
@@ -7,7 +7,7 @@ import { battalions } from "../Battalions/BattalionsMain";
 const ActiveBattalion = (props) => {
   const authCtx = useContext(AuthContext);
   const [battalionUnits, setBattalionUnits] = useState([]);
-
+  const [showDetails, setShowDetails] = useState();
   const [usedAbility, setUsedAbility] = useState(false);
 
   const allUnits = authCtx.userArmy.units;
@@ -17,9 +17,16 @@ const ActiveBattalion = (props) => {
   );
 
   const bonusesRef = useRef(currBattalionRef.current[0].bonuses);
+  const bonusTextRef = useRef(currBattalionRef.current[0].textArray);
 
   useEffect(() => {
-    const unitTypeArray = ["leaders", "battleline", "monsters", "artillery"];
+    const unitTypeArray = [
+      "leaders",
+      "battleline",
+      "monsters",
+      "artillery",
+      "other",
+    ];
     let unitsArray = [];
     unitTypeArray.forEach((unitType) =>
       allUnits[`${unitType}`].forEach((unit) => {
@@ -57,14 +64,28 @@ const ActiveBattalion = (props) => {
             ))}
           </ul>
         </div>
-        <div className={classes.battalionBonuses}>
+        <div
+          onMouseEnter={() => setShowDetails(true)}
+          onMouseLeave={() => setShowDetails(false)}
+          onClick={() => setUsedAbility((prevState) => !prevState)}
+          className={
+            usedAbility
+              ? classes.battalionBonusesUsed
+              : classes.battalionBonuses
+          }
+        >
+          <div className={showDetails ? classes.details : classes.hidden}>
+            {bonusTextRef.current}
+          </div>
           <h3>
             {bonusesRef.current.map((bonus) => (
               <span>{bonus}</span>
             ))}
           </h3>
-          <button onClick={deleteBattalionHandler}>Delete</button>
         </div>
+        <button className={classes.delete} onClick={deleteBattalionHandler}>
+          Delete
+        </button>
       </Card>
     </>
   );

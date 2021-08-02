@@ -1,0 +1,12 @@
+.memberItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0;
+  height: 8%;
+  background: #3b87a6;
+}
+.admin {
+  margin-left: auto;
+}

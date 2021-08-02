@@ -1,0 +1,60 @@
+.battleViewModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 90%;
+  background: #cfcfb8;
+}
+.battleNameBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.battleNameBox h1 {
+  margin: 0px;
+}
+.battleNameBox h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+
+  margin-bottom: 5px;
+}
+.info {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+  width: 70%;
+  margin-top: 3%;
+  border-bottom: 2px solid #3b87a6;
+}
+
+.date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* padding-bottom: 10px; */
+  width: 70%;
+  margin-top: 5%;
+  margin-bottom: 8%;
+  border-top: 2px solid #3b87a6;
+  border-bottom: 2px solid #3b87a6;
+}
+.scoresBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1%;
+}
+.bothScores {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+.armyListModal {
+  z-index: 60;
+}

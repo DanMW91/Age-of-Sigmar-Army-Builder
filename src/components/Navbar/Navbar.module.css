@@ -1,41 +1,70 @@
 .navbar {
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  background: rgb(24, 117, 179);
-  height: 3vw;
+  background: #015178;
+  height: 12%;
 }
 
 .navbar ul {
   display: flex;
   justify-content: center;
-
+  align-items: flex-end;
+  width: 70%;
   height: 100%;
   margin: 0;
 }
 
 .navbar li {
+  position: relative;
   display: flex;
+  flex-direction: column;
   margin-right: 5px;
-  height: 100%;
-  border-radius: 5px;
+  height: 80%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   list-style-type: none;
 
   width: 20%;
-  background: rgb(123, 184, 224);
+  background: #3b87a6;
 }
 
 .navbar a {
   display: flex;
-
+  color: inherit;
+  font-size: large;
   line-height: 50%;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   width: 100%;
+
   height: 100%;
 }
 .navbar .active {
-  background: rgb(198, 220, 235);
+  background: #cfcfb8;
+}
+
+.notification {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.title {
+  align-items: center;
+  display: flex;
+  color: #cfcfb8;
+  justify-content: flex-end;
+  width: 35%;
+  font-size: xx-large;
+}
+
+.sigmarSquare {
+  height: 100%;
+  width: auto;
+  margin-left: 5rem;
 }

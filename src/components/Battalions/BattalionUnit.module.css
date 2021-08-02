@@ -34,6 +34,26 @@
   transform: scale(1.015);
 }
 .leaderSelect {
+  position: fixed;
+
+  background: rgb(216, 75, 70);
+  margin-left: 200px;
+}
+
+.commander {
+  padding: 5px;
+  border: 1px solid rgb(255, 115, 111);
+  border-bottom: none;
+}
+
+.leader {
+  padding: 5px;
+  border: 1px solid rgb(255, 115, 111);
+}
+
+.commander:hover,
+.leader:hover {
+  background: rgb(255, 115, 111);
 }
 
 .hidden {

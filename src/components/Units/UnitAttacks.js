@@ -17,7 +17,7 @@ const UnitAttacks = (props) => {
         <tbody>
           {props.attacks.map((attack) => {
             return (
-              <tr>
+              <tr key={Math.random()}>
                 <td>{attack.range}"</td>
                 <td>{attack.attacks}</td>
                 <td>{attack.toHit}+</td>

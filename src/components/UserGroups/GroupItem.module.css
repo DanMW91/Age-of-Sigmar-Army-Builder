@@ -1,0 +1,27 @@
+.groupItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 92%;
+  height: 10%;
+  min-height: 10%;
+  border-radius: 0;
+  margin-top: 1%;
+  background: #3b87a6;
+  transition: transform 0.2s;
+}
+
+.groupItem:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}
+.groupItem h3 {
+  margin: 0px;
+}
+
+.notification {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}

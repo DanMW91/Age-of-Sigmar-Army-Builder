@@ -1,4 +1,6 @@
 .battalionSquare {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   width: 25%;
@@ -49,4 +51,22 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.details {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  padding: 10px;
+  z-index: 10;
+  position: absolute;
+  color: rgb(207, 207, 207);
+  background: rgba(51, 51, 51, 0.877);
+  margin-left: 20px;
+  bottom: 20px;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
 }
