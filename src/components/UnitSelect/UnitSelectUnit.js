@@ -24,6 +24,7 @@ const UnitSelectUnit = (props) => {
     const unitType = unitObjRef.current.unitType;
     const unitId = unitObjRef.current.id;
     await deleteUnit(userId, token, unitType, unitId);
+    props.onSetUnits();
   };
   return (
     <Card className={classes.unit} onClick={addUnitHandler}>

@@ -11,7 +11,14 @@ const UnitSelectContainer = (props) => {
         <h2>{props.containerType}</h2>
       </div>
       {units.map((unit) => {
-        return <UnitSelectUnit key={unit.id} name={unit.name} unitObj={unit} />;
+        return (
+          <UnitSelectUnit
+            onSetUnits={props.onSetUnits}
+            key={unit.id}
+            name={unit.name}
+            unitObj={unit}
+          />
+        );
       })}
     </Card>
   );
