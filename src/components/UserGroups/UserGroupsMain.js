@@ -22,10 +22,10 @@ const UserGroupsMain = () => {
 
     (async () => {
       const groups = await fetchGroups(userId, token);
-      const groupReqs = await fetchGroupReqs(userId, token);
+
       if (mounted) {
         setGroups(groups);
-        setGroupReqs(groupReqs);
+
         setShowGroups(true);
       }
     })();

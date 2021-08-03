@@ -1,4 +1,11 @@
-import React, { useState, useCallback, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useContext,
+  useLayoutEffect,
+} from "react";
+import { fetchGroupReqs } from "../firebase-api/firebase-api";
 import AuthContext from "./auth-context";
 
 const GroupsContext = React.createContext({
@@ -13,6 +20,13 @@ export const GroupsContextProvider = (props) => {
   const [allGroups, setAllGroups] = useState();
   const [activeGroup, setActiveGroup] = useState();
   const [groupReqs, setGroupReqs] = useState();
+
+  useLayoutEffect(() => {
+    (async () => {
+      const groupReqs = await fetchGroupReqs(authCtx.userId, authCtx.token);
+      setGroupReqs(groupReqs);
+    })();
+  }, [authCtx.token, authCtx.userId]);
 
   useEffect(() => {
     if (!activeGroup) return;

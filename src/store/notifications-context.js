@@ -20,7 +20,7 @@ const NotificationsContext = React.createContext({
 });
 
 export const NotificationsContextProvider = (props) => {
-  const [inviteNotifications, setInviteNotifications] = useState(null);
+  const [inviteNotifications, setInviteNotifications] = useState(false);
   const [pendingLogNotifications, setPendingLogNotifications] = useState(null);
   const [groupsWithNotifications, setGroupsWithNotifications] = useState(null);
   const [currentGroupHasNotifications, setCurrentGroupHasNotifications] =
@@ -32,11 +32,23 @@ export const NotificationsContextProvider = (props) => {
   const isNotifications =
     inviteNotifications || pendingLogNotifications ? true : false;
 
+  useLayoutEffect(() => {
+    if (!authCtx.isLoggedIn) return;
+    console.log(groupsCtx.groupReqs);
+    if (groupsCtx.groupReqs) {
+      console.log(groupsCtx.groupReqs);
+      setInviteNotifications(true);
+    } else {
+      setInviteNotifications(false);
+    }
+  }, [groupsCtx.groupReqs, authCtx.isLoggedIn]);
+
   const setNotifications = useCallback(async () => {
     const userId = authCtx.userId;
     const token = authCtx.token;
     const notifications = await fetchNotifications(token, userId);
 
+    console.log(notifications);
     if (!notifications) {
       setCurrentGroupHasNotifications(false);
       setPendingLogNotifications(null);
