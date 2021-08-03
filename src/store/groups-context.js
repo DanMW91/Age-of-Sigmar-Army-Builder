@@ -22,8 +22,10 @@ export const GroupsContextProvider = (props) => {
   const [groupReqs, setGroupReqs] = useState();
 
   useLayoutEffect(() => {
+    if (!authCtx.token) return;
     (async () => {
       const groupReqs = await fetchGroupReqs(authCtx.userId, authCtx.token);
+
       setGroupReqs(groupReqs);
     })();
   }, [authCtx.token, authCtx.userId]);

@@ -34,9 +34,8 @@ export const NotificationsContextProvider = (props) => {
 
   useLayoutEffect(() => {
     if (!authCtx.isLoggedIn) return;
-    console.log(groupsCtx.groupReqs);
+
     if (groupsCtx.groupReqs) {
-      console.log(groupsCtx.groupReqs);
       setInviteNotifications(true);
     } else {
       setInviteNotifications(false);
@@ -48,7 +47,6 @@ export const NotificationsContextProvider = (props) => {
     const token = authCtx.token;
     const notifications = await fetchNotifications(token, userId);
 
-    console.log(notifications);
     if (!notifications) {
       setCurrentGroupHasNotifications(false);
       setPendingLogNotifications(null);

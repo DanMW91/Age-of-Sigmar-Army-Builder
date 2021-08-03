@@ -88,7 +88,7 @@ export const AuthContextProvider = (props) => {
         const { userId, token, userNameResult } = await sendRefreshToken(
           refreshToken
         );
-        console.log(userId, token, userNameResult);
+
         loginHandler(token, userId, userNameResult, refreshToken);
       }
       setIsLoading(false);
@@ -111,7 +111,7 @@ export const AuthContextProvider = (props) => {
     setUserId(userId);
     setToken(token);
     setUserName(name);
-    console.log(name);
+
     // setIsLoading(true);
 
     localStorage.setItem("refreshToken", refreshToken);

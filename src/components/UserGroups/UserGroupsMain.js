@@ -33,7 +33,7 @@ const UserGroupsMain = () => {
     return function cleanup() {
       mounted = false;
     };
-  }, [userId, token, setGroups, setGroupReqs]);
+  }, [userId, token, setGroups]);
 
   return (
     <Card className={classes.card}>

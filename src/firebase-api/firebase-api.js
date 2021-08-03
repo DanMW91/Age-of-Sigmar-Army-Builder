@@ -449,6 +449,7 @@ export const fetchGroupReqs = async (userId, token) => {
     );
 
     const res = await response.json();
+
     if (!res) return;
     const groupReqs = Object.values(res);
     return groupReqs;
@@ -652,10 +653,9 @@ export const sendRefreshToken = async (refreshToken) => {
         headers: { "Content-Type": "application/json" },
       }
     );
-    console.log(response);
 
     const res = await response.json();
-    console.log(res);
+
     if (!response.ok) throw new Error(response.error);
     const { user_id: userId, id_token: token } = res;
 
