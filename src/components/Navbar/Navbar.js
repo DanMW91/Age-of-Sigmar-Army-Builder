@@ -4,8 +4,10 @@ import classes from "./Navbar.module.css";
 import NotificationsContext from "../../store/notifications-context";
 import Notification from "../UI/Notification";
 import sigmarSquare from "../../assets/sigmar-square.png";
+import AuthContext from "../../store/auth-context";
 
 const Navbar = () => {
+  const authCtx = useContext(AuthContext);
   const notificationsCtx = useContext(NotificationsContext);
   const isNotifications = notificationsCtx.isNotifications;
 
@@ -42,6 +44,9 @@ const Navbar = () => {
           </NavLink>
         </li> */}
       </ul>
+      <button className={classes.logout} onClick={() => authCtx.logout()}>
+        Logout
+      </button>
     </nav>
   );
 };

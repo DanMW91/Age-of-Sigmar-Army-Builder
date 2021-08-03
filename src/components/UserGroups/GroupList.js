@@ -36,6 +36,10 @@ const GroupList = (props) => {
     const groupName = groupNameRef.current.value;
     const groupId = uuidv4();
     toggleLoading();
+    console.log(userId);
+    console.log(token);
+    console.log(authCtx.userName);
+    console.log(userName);
     await createGroup(userId, token, userName, groupName, groupId);
     const updatedGroups = await fetchGroups(userId, token);
     setGroups(updatedGroups);

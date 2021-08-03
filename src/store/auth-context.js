@@ -1,5 +1,12 @@
-import React, { useState, useReducer, useEffect, useRef } from "react";
-import { storeArmy } from "../firebase-api/firebase-api";
+import React, {
+  useState,
+  useReducer,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
+import { storeArmy, sendRefreshToken } from "../firebase-api/firebase-api";
+
 import produce from "immer";
 
 const AuthContext = React.createContext({
@@ -66,12 +73,27 @@ const armyReducer = (state, action) =>
 export const AuthContextProvider = (props) => {
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [userArmy, dispatchUserArmy] = useReducer(armyReducer, {});
   const [armyLoaded, setArmyLoaded] = useState(false);
-  const userNameRef = useRef("");
+  const [userName, setUserName] = useState("");
 
   const userIsLoggedIn = !!token;
+
+  useLayoutEffect(() => {
+    setIsLoading(true);
+    const refreshToken = localStorage.getItem("refreshToken");
+    (async () => {
+      if (!token && refreshToken) {
+        const { userId, token, userNameResult } = await sendRefreshToken(
+          refreshToken
+        );
+        console.log(userId, token, userNameResult);
+        loginHandler(token, userId, userNameResult, refreshToken);
+      }
+      setIsLoading(false);
+    })();
+  }, [token]);
 
   const setArmyHandler = (army) => {
     dispatchUserArmy({
@@ -85,14 +107,15 @@ export const AuthContextProvider = (props) => {
     setArmyLoaded(false);
   };
 
-  const loginHandler = (token, userId, name) => {
+  const loginHandler = (token, userId, name, refreshToken) => {
     setUserId(userId);
     setToken(token);
+    setUserName(name);
+    console.log(name);
+    // setIsLoading(true);
 
-    setIsLoading(true);
-    userNameRef.current = name;
-
-    setIsLoading(false);
+    localStorage.setItem("refreshToken", refreshToken);
+    // setIsLoading(false);
   };
 
   useEffect(() => {
@@ -114,6 +137,7 @@ export const AuthContextProvider = (props) => {
   }, [userArmy, token, userIsLoggedIn, userId]);
 
   const logoutHandler = () => {
+    localStorage.removeItem("refreshToken");
     setUserId(null);
     setToken(null);
   };
@@ -216,7 +240,7 @@ export const AuthContextProvider = (props) => {
     token: token,
     userId: userId,
     userArmy: userArmy,
-    userName: userNameRef.current,
+    userName,
     isLoggedIn: userIsLoggedIn,
     isLoading,
     login: loginHandler,

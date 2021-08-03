@@ -183,12 +183,12 @@ export const registerUser = async (
       throw new Error(results.error.message);
     }
 
-    const { localId: userId, idToken: token } = results;
+    const { localId: userId, idToken: token, refreshToken } = results;
 
     await storeUserName(userId, enteredUserName, token);
     await createAllUnitsFrame(userId, token);
 
-    return { userId, token };
+    return { userId, token, refreshToken };
   } catch (err) {
     throw new Error(err.message);
   }
@@ -214,7 +214,7 @@ export const loginUser = async (enteredEmail, enteredPassword) => {
     if (!response.ok) {
       throw new Error(results.error.message);
     }
-    const { localId: userId, idToken: token } = results;
+    const { localId: userId, idToken: token, refreshToken } = results;
 
     const userNameResponse = await fetch(
       `${FIREBASE_CONSTANTS.URL}/users/${userId}/userName.json?auth=${token}`
@@ -226,7 +226,7 @@ export const loginUser = async (enteredEmail, enteredPassword) => {
       throw new Error(results.error.message);
     }
 
-    return { userId, token, userNameResult };
+    return { userId, token, userNameResult, refreshToken };
   } catch (err) {
     throw new Error(err.message);
   }
@@ -634,6 +634,42 @@ export const storeLog = async (token, groupId, log) => {
     if (!response.ok) {
       throw new Error(response.error);
     }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const sendRefreshToken = async (refreshToken) => {
+  try {
+    const response = await fetch(
+      `https://securetoken.googleapis.com/v1/token?key=${FIREBASE_CONSTANTS.API_KEY}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          grant_type: "refresh_token",
+          refresh_token: refreshToken,
+        }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log(response);
+
+    const res = await response.json();
+    console.log(res);
+    if (!response.ok) throw new Error(response.error);
+    const { user_id: userId, id_token: token } = res;
+
+    const userNameResponse = await fetch(
+      `${FIREBASE_CONSTANTS.URL}/users/${userId}/userName.json?auth=${token}`
+    );
+
+    const userNameResult = await userNameResponse.json();
+
+    if (!userNameResponse.ok) {
+      throw new Error(userNameResponse.error);
+    }
+
+    return { userId, token, userNameResult };
   } catch (err) {
     console.error(err);
   }

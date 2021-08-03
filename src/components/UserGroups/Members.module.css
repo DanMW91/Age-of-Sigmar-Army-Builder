@@ -48,8 +48,9 @@
   top: 20%;
   color: black;
   font-weight: bolder;
-  border-radius: 15px;
+  border-radius: 6px;
   padding: 1%;
+  opacity: 80%;
 }
 .successMsg {
   display: flex;
@@ -61,8 +62,9 @@
   top: 20%;
   color: black;
   font-weight: bolder;
-  border-radius: 15px;
+  border-radius: 6px;
   padding: 1%;
+  opacity: 80%;
 }
 .inviteUser {
   display: flex;

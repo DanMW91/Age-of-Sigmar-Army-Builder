@@ -42,12 +42,12 @@ const LoginForm = () => {
     }
     authCtx.setLoading(true);
     try {
-      const { userId, token } = await registerUser(
+      const { userId, token, refreshToken } = await registerUser(
         enteredEmail,
         enteredPassword,
         enteredUserName
       );
-      authCtx.login(token, userId, enteredUserName);
+      authCtx.login(token, userId, enteredUserName, refreshToken);
       authCtx.setLoading(false);
     } catch (error) {
       authCtx.setLoading(false);
@@ -62,12 +62,12 @@ const LoginForm = () => {
     const enteredPassword = passwordInputRef.current.value;
     authCtx.setLoading(true);
     try {
-      const { userId, token, userNameResult } = await loginUser(
+      const { userId, token, userNameResult, refreshToken } = await loginUser(
         enteredEmail,
         enteredPassword
       );
 
-      authCtx.login(token, userId, userNameResult);
+      authCtx.login(token, userId, userNameResult, refreshToken);
       authCtx.setLoading(false);
     } catch (err) {
       setError(err.message);
