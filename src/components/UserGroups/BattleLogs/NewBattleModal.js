@@ -52,7 +52,7 @@ const NewBattleModal = (props) => {
         date: dateRef.current.value,
       };
     }
-    console.log(logObjectRef);
+
     setFormState("ARMY-LIST");
   };
 
@@ -61,8 +61,7 @@ const NewBattleModal = (props) => {
 
     const token = authCtx.token;
     logObjectRef.current.armyList1 = armyListRef.current.value;
-    console.log(logObjectRef.current);
-    console.log(Object.values(groupsCtx.activeGroup)[0]);
+
     const groupId = Object.values(groupsCtx.activeGroup)[0].groupId;
 
     const notificationObj = {

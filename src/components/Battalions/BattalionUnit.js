@@ -6,8 +6,6 @@ const BattalionUnit = (props) => {
   const [selected, setSelected] = useState(false);
   const [displayLeaderSelection, setDisplayLeaderSelection] = useState(null);
 
-  console.log(props);
-
   const unitTypeRef = useRef();
 
   const curBattalionName = props.battalionName;

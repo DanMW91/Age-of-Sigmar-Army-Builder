@@ -11,7 +11,6 @@ const BattalionUnitContainer = (props) => {
   const onToggleUnitHandler = (unitObj, type, action) => {
     props.onToggleUnit(unitObj, type, action);
   };
-  console.log();
 
   return (
     <Card className={classes.unitContainer}>

@@ -44,7 +44,6 @@ const ArmiesList = (props) => {
   const armiesArray = Object.values(props.armies)
     .map((army) => Object.values(army))
     .flat();
-  console.log(armiesArray);
 
   return (
     <div>

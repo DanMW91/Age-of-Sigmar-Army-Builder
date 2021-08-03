@@ -8,12 +8,12 @@ import { deleteUnit } from "../../firebase-api/firebase-api";
 const UnitSelectUnit = (props) => {
   const authCtx = useContext(AuthContext);
   const unitObjRef = useRef(props.unitObj);
-  console.log(unitObjRef);
+
   const addUnitHandler = () => {
     const newUnitObj = JSON.parse(JSON.stringify(unitObjRef));
 
     newUnitObj.current.id = Math.random();
-    console.log(newUnitObj);
+
     authCtx.addUnit(newUnitObj);
   };
 

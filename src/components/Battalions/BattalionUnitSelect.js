@@ -145,7 +145,6 @@ const BattalionUnitSelect = React.forwardRef((props, ref) => {
 
   const toggleUnitHandler = (unitObj, unit, action) => {
     if (action === "ADD") {
-      console.log(unitObj);
       tempBattalionUnits.current.push(unitObj);
       dispatchBattalionState({
         type: "ADD-UNIT",
@@ -229,9 +228,9 @@ const BattalionUnitSelect = React.forwardRef((props, ref) => {
 
       {showAddBattalion && (
         <div className={classes.buttonBar}>
-        <div onClick={addBattalionHandler} className={classes.button}>
-          <h3>Add Battalion</h3>
-        </div>
+          <div onClick={addBattalionHandler} className={classes.button}>
+            <h3>Add Battalion</h3>
+          </div>
         </div>
       )}
     </Card>

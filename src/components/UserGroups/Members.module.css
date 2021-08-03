@@ -2,4 +2,13 @@
   padding-top: 5%;
   height: 80%;
   width: 90%;
+  margin-left: 3%;
+}
+.errorMsg {
+  color: red;
+  font-weight: bolder;
+}
+.successMsg {
+  color: rgb(8, 180, 8);
+  font-weight: bolder;
 }

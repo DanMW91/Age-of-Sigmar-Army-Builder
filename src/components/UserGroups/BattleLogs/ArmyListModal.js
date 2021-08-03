@@ -2,8 +2,6 @@ import Modal from "../../UI/Modal";
 import classes from "./ArmyListModal.module.css";
 
 const ArmyListModal = (props) => {
-  console.log(props);
-
   return (
     <Modal className={classes.armylistModal} onCloseModal={props.onCloseModal}>
       <div className={classes.army}>

@@ -6,7 +6,6 @@ import classes from "./BattleLogItem.module.css";
 const BattleLogItem = (props) => {
   const [showBattleModal, setShowBattleModal] = useState(false);
 
-  console.log(props);
   const battleName = props.log.battleName;
   const player1 = props.log.yourName;
   const player2 = props.log.opponentName;

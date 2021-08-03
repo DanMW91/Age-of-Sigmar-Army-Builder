@@ -76,7 +76,7 @@ const LoginForm = () => {
   };
 
   return (
-    <section>
+    <section className={classes.section}>
       {!authCtx.isLoading && (
         <Card className={classes.loginForm}>
           {loggingIn && (

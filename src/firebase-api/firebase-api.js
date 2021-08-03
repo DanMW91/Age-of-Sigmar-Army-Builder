@@ -438,7 +438,8 @@ export const sendGroupRequest = async (token, groupId, userName, groupName) => {
     );
     if (!groupReq.ok) throw new Error(groupReq);
   } catch (err) {
-    console.error(err);
+   
+    throw new Error(err.message);
   }
 };
 
@@ -500,7 +501,6 @@ export const addUserToGroup = async (
 
     const fetchedGroup = await groupData.json();
 
-    console.log(fetchedGroup);
     let groupKey = "";
 
     for (const key in fetchedGroup) {
@@ -611,7 +611,7 @@ export const retrieveLogs = async (groupId, token) => {
     const response = await fetch(
       `${FIREBASE_CONSTANTS.URL}/groups/${groupId}/logs/.json?auth=${token}`
     );
-    console.log(response);
+
     const logs = await response.json();
     for (const key in logs) {
       logs[key].logKey = key;
@@ -619,7 +619,7 @@ export const retrieveLogs = async (groupId, token) => {
     if (!response.ok) {
       throw new Error(response.error);
     }
-    console.log(logs);
+
     return logs;
   } catch (err) {
     console.error(err);

@@ -17,7 +17,6 @@ const BattleViewModal = (props) => {
     setHideLog(false);
   };
 
-  console.log(props);
   return (
     <>
       {!hideLog && (

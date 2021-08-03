@@ -20,7 +20,6 @@ export const GroupsContextProvider = (props) => {
     //check if user is Admin for active group
 
     const group = Object.values(activeGroup)[0];
-    console.log(group);
 
     const admin = Object.values(group.members).filter(
       (member) => member.userId === authCtx.userId
