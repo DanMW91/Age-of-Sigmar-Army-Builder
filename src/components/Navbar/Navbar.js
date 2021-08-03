@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import classes from "./Navbar.module.css";
@@ -7,9 +8,15 @@ import sigmarSquare from "../../assets/sigmar-square.png";
 import AuthContext from "../../store/auth-context";
 
 const Navbar = () => {
+  const history = useHistory();
   const authCtx = useContext(AuthContext);
   const notificationsCtx = useContext(NotificationsContext);
   const isNotifications = notificationsCtx.isNotifications;
+
+  const logoutHandler = () => {
+    history.push("/login");
+    authCtx.logout();
+  };
 
   return (
     <nav className={classes.navbar}>
@@ -44,7 +51,7 @@ const Navbar = () => {
           </NavLink>
         </li> */}
       </ul>
-      <button className={classes.logout} onClick={() => authCtx.logout()}>
+      <button className={classes.logout} onClick={logoutHandler}>
         Logout
       </button>
     </nav>
