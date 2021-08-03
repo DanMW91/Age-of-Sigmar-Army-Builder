@@ -78,4 +78,7 @@
   .navbar li {
     width: 30%;
   }
+  .title {
+    font-size: x-large;
+  }
 }
