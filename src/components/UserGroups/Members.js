@@ -3,6 +3,7 @@ import { sendGroupRequest } from "../../firebase-api/firebase-api";
 import MemberItem from "./MemberItem";
 import GroupsContext from "../../store/groups-context";
 import AuthContext from "../../store/auth-context";
+import Card from "../UI/Card";
 import classes from "./Members.module.css";
 
 const Members = () => {
@@ -63,34 +64,40 @@ const Members = () => {
   };
 
   return (
-    <div className={classes.membersList}>
-      <h3>{Object.values(groupsCtx.activeGroup)[0].groupName}</h3>
-      {groupsCtx.isAdmin && (
-        <>
-          <form onSubmit={sendGroupRequestHandler}>
-            <label htmlFor="userName">User Name:</label>
-            <input
-              id="userName"
-              type="text"
-              required
-              ref={sendReqUserNameRef}
-            />
-            <button type="submit">Invite User</button>
-          </form>
-          {errorMsg && <span className={classes.errorMsg}>{errorMsg}</span>}
-          {successMsg && (
-            <span className={classes.successMsg}>{successMsg}</span>
+    <section className={classes.membersPage}>
+      <Card className={classes.card}>
+        <div className={classes.groupName}>
+          <h2>{Object.values(groupsCtx.activeGroup)[0].groupName}</h2>
+        </div>
+        <div className={classes.membersList}>
+          {groupsCtx.isAdmin && (
+            <div className={classes.inviteUser}>
+              <form onSubmit={sendGroupRequestHandler}>
+                <label htmlFor="userName">User Name:</label>
+                <input
+                  id="userName"
+                  type="text"
+                  required
+                  ref={sendReqUserNameRef}
+                />
+                <button type="submit">Invite User</button>
+              </form>
+              {errorMsg && <span className={classes.errorMsg}>{errorMsg}</span>}
+              {successMsg && (
+                <span className={classes.successMsg}>{successMsg}</span>
+              )}
+            </div>
           )}
-        </>
-      )}
-      {membersList.map((member) => (
-        <MemberItem
-          userName={member.userName}
-          admin={member.admin}
-          key={Math.random()}
-        />
-      ))}
-    </div>
+          {membersList.map((member) => (
+            <MemberItem
+              userName={member.userName}
+              admin={member.admin}
+              key={Math.random()}
+            />
+          ))}
+        </div>
+      </Card>
+    </section>
   );
 };
 

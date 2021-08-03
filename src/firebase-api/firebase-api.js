@@ -412,7 +412,7 @@ export const sendGroupRequest = async (token, groupId, userName, groupName) => {
       `${FIREBASE_CONSTANTS.URL}/allUsers/${userName}.json?auth=${token}`
     );
     const userIdObj = await response.json();
-    if (!userIdObj) throw new Error("no such user!");
+    if (!userIdObj) throw new Error("No Such User!");
     const userId = Object.values(userIdObj)[0].userId;
 
     //check if user had already been invited to this group
@@ -438,7 +438,6 @@ export const sendGroupRequest = async (token, groupId, userName, groupName) => {
     );
     if (!groupReq.ok) throw new Error(groupReq);
   } catch (err) {
-   
     throw new Error(err.message);
   }
 };
