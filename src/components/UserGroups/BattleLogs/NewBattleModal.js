@@ -139,7 +139,7 @@ const NewBattleModal = (props) => {
       {formState === "ARMY-LIST" && (
         <form className={classes.armyListForm} onSubmit={submitLogHandler}>
           <label htmlFor="armyList">Enter Army List:</label>
-          <input
+          <textarea
             className={classes.armyListInput}
             type="textarea"
             ref={armyListRef}
