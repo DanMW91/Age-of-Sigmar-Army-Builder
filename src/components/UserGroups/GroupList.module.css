@@ -16,15 +16,29 @@
   margin: 3%;
 }
 
+.groupSection form button {
+  width: 70%;
+}
+.groupSection form input {
+  width: 70%;
+}
 .groupList {
   display: flex;
   flex-direction: column;
+  align-content: center;
   height: 80%;
   width: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .loadingSpinner {
   width: 15vh;
   height: 15vh;
+}
+@media (max-width: 800px) {
+  .loadingSpinner {
+    width: 5vh;
+    height: 5vh;
+  }
 }

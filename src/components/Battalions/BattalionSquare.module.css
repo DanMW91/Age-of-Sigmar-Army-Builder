@@ -45,12 +45,15 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  max-width: 100%;
 }
 
 .battalionContent {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  width: 100%;
+  max-width: 100%;
 }
 
 .details {

@@ -10,3 +10,15 @@
 .optional {
   background: rgb(201, 69, 69);
 }
+
+@media (max-width: 800px) {
+  .smallSquare {
+    padding: 1px;
+    border-radius: 3px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: smaller;
+    margin: 5px;
+    margin-top: 5px;
+  }
+}

@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 92%;
+  width: 85%;
   height: 10%;
   min-height: 10%;
   border-radius: 0;
@@ -24,4 +24,10 @@
   position: absolute;
   right: 5px;
   top: 5px;
+}
+@media (max-width: 800px) {
+  .notification {
+    height: 0.5rem;
+    width: 0.5rem;
+  }
 }
