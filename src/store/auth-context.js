@@ -24,6 +24,9 @@ const AuthContext = React.createContext({
 const armyReducer = (state, action) =>
   produce(state, (draft) => {
     switch (action.type) {
+      case "UNLOAD-ARMY":
+        return (draft = {});
+
       case "LOAD-ARMY":
         return action.val;
 
@@ -140,6 +143,10 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem("refreshToken");
     setUserId(null);
     setToken(null);
+    setArmyLoaded(false);
+    dispatchUserArmy({
+      type: "UNLOAD-ARMY",
+    });
   };
 
   const addUnitHandler = (unitObj) => {
