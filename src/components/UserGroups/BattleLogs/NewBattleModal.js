@@ -141,7 +141,7 @@ const NewBattleModal = (props) => {
           <label htmlFor="armyList">Enter Army List:</label>
           <input
             className={classes.armyListInput}
-            type="text"
+            type="textarea"
             ref={armyListRef}
             required
           />

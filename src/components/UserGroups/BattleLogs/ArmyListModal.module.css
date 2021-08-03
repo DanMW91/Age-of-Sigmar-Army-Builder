@@ -1,5 +1,19 @@
 .armyListModal {
-  width: 90%;
-  height: 70%;
+  margin-top: 0.5%;
+  display: flex;
+  width: 70%;
+  height: 85%;
+  padding: 3%;
   background: #cfcfb8;
+  display: flex;
+  justify-content: space-around;
+}
+.army {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  white-space: pre-line;
+}
+.userName {
+  font-weight: bold;
 }

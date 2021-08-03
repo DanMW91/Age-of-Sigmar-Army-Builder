@@ -6,7 +6,8 @@ import classes from "./BattleViewModal.module.css";
 const BattleViewModal = (props) => {
   const [showArmies, setShowArmies] = useState(false);
   const [hideLog, setHideLog] = useState(false);
-
+  console.log(props.log.armyList1);
+  console.log(props.log.armyList2);
   const openArmyModalHandler = () => {
     setShowArmies(true);
     setHideLog(true);

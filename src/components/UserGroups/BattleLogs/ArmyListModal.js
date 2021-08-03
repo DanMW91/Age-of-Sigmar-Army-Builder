@@ -3,12 +3,14 @@ import classes from "./ArmyListModal.module.css";
 
 const ArmyListModal = (props) => {
   return (
-    <Modal className={classes.armylistModal} onCloseModal={props.onCloseModal}>
+    <Modal className={classes.armyListModal} onCloseModal={props.onCloseModal}>
       <div className={classes.army}>
-        {props.army1User}'s Army : {props.army1}
+        <div className={classes.userName}>{props.army1User}'s Army:</div>
+        <div>{props.army1}</div>
       </div>
       <div className={classes.army}>
-        {props.army2User}'s Army : {props.army2}
+        <div className={classes.userName}>{props.army2User}'s Army :</div>{" "}
+        <div>{props.army2}</div>
       </div>
     </Modal>
   );
