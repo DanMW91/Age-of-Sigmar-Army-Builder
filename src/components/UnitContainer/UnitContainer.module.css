@@ -9,6 +9,7 @@
 .containerheader {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   background-color: #015178;
   border-top-left-radius: 15px;
@@ -17,4 +18,10 @@
 .containerheader h2 {
   margin: 1px;
   color: rgb(202, 217, 228);
+}
+
+@media (screen-width: 800px) {
+  .unitContainer {
+    width: 95%;
+  }
 }

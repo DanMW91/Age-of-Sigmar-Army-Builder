@@ -75,14 +75,6 @@
 }
 
 @media only screen and (max-width: 800px) {
-  .warscroll {
-    width: 85vw;
-    height: auto;
-    object-fit: contain;
-  }
-  .warscrollmodal {
-    display: inline-block;
-  }
   .unit {
     padding: 1px;
     margin-left: 0.5%;

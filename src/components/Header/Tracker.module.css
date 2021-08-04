@@ -41,13 +41,13 @@
 
 @media only screen and (max-width: 800px) {
   .tracker {
-    width: 15vw;
+    width: 12vw;
     height: 12vw;
   }
   .tracking {
     font-size: small;
   }
   .number {
-    font-size: small;
+    font-size: large;
   }
 }
