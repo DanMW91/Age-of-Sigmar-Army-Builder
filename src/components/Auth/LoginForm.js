@@ -83,7 +83,7 @@ const LoginForm = () => {
             <form className={classes.authForm} onSubmit={loginHandler}>
               <label htmlFor="email">Email:</label>
               <input id="email" type="text" ref={emailInputRef} required />
-              <label htmlFor="password">Passsword:</label>
+              <label htmlFor="password">Password:</label>
               <input
                 id="password"
                 type="password"
