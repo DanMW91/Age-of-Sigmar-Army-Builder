@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from "react";
 import classes from "./Tracker.module.css";
 import upArrow from "../../assets/up-arrow.png";

@@ -3,7 +3,6 @@ import React, {
   useReducer,
   useEffect,
   useLayoutEffect,
-  useRef,
 } from "react";
 import { storeArmy, sendRefreshToken } from "../firebase-api/firebase-api";
 
@@ -16,7 +15,7 @@ const AuthContext = React.createContext({
   userName: "",
   isLoggedIn: false,
   isLoading: false,
-  login: (token) => {},
+  login: () => {},
   logout: () => {},
   addUnit: () => {},
 });
@@ -54,10 +53,9 @@ const armyReducer = (state, action) =>
         }
         break;
       case "REMOVE-BATTALION":
-        const newArr = draft.activeBattalions.filter(
+        draft.activeBattalions = draft.activeBattalions.filter(
           (battalion) => battalion?.battalionId !== action.battalionId
         );
-        draft.activeBattalions = newArr;
 
         action.unitTypeArr.forEach((type) => {
           draft.units[`${type}`].slice(1).forEach((unit, i) => {

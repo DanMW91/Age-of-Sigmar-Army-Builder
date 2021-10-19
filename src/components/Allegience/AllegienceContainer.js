@@ -1,3 +1,4 @@
+import React from 'react'
 import Card from "../UI/Card";
 import Allegience from "./Allegience";
 import classes from "./AllegienceContainer.module.css";
